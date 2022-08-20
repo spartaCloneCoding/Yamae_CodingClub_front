@@ -4,7 +4,8 @@ import thunk from "redux-thunk";
 
 const middlewares = [thunk];
 const rootReducer = combineReducers({
-
+  // login: loginReducer,
+  // signup: signupReducer,
 });
 
 const store = configureStore({
