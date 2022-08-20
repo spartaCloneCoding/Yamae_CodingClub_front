@@ -1,11 +1,15 @@
 import React from "react";
+import styled from "styled-components"
 
 const Layout = () => {
   return (
-    <div>
-      Layout
-    </div>
+    <StLayout />
   )
 }
+
+const StLayout = styled.div`
+  min-width: 930px;
+  min-height: 100vh;
+`;
 
 export default Layout;
