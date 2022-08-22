@@ -9,36 +9,42 @@ const Header = () => {
   return (
     <StHeader>
       <div>
-      <StLeftContainer onClick={() => {
-        navigate("/");
-      }}>
-        <Logo />
-      </StLeftContainer>
-      <StListContainer>
-        <div>수업탐색</div>
-        <li
+        <StLeftContainer
           onClick={() => {
-            navigate("/inquiry");
+            navigate("/");
           }}
         >
-          문의하기
-        </li>
-        <li>수강생 후기</li>
-        <li>블로그</li>
-        <li
-          onClick={() => {
-            navigate("/community");
-          }}
-        >
-          커뮤니티
-        </li>
-        <li>기업교육</li>
-      </StListContainer>
+          <Logo />
+        </StLeftContainer>
+        <StListContainer>
+          <div>수업탐색</div>
+          <li
+            onClick={() => {
+              navigate("/inquiry");
+            }}
+          >
+            문의하기
+          </li>
+          <li>수강생 후기</li>
+          <li>블로그</li>
+          <li
+            onClick={() => {
+              navigate("/community");
+            }}
+          >
+            커뮤니티
+          </li>
+          <li>기업교육</li>
+        </StListContainer>
       </div>
       <StRightContainer>
-        <StBtn onClick={() => {
-          navigate("/login");
-        }}>로그인</StBtn>
+        <StBtn
+          onClick={() => {
+            navigate("/login");
+          }}
+        >
+          로그인
+        </StBtn>
       </StRightContainer>
     </StHeader>
   );

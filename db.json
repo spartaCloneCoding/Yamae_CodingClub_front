@@ -1,0 +1,102 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "nickname": "조지오웰",
+      "title": "돼지",
+      "content": "동물농장",
+      "createAt": "2020-20-20"
+    },
+    {
+      "title": "안녕하세요",
+      "content": "물어볼게 있습니다.",
+      "id": 2
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "nickname": "조지오웰",
+      "comment": "동물농장",
+      "createAt": "2020-20-20"
+    },
+    {
+      "nickname": "멍멍이",
+      "comment": "동물농장ㄴㅇㄹ",
+      "createAt": "2020-20-20",
+      "id": 2
+    },
+    {
+      "nickname": "멍멍이",
+      "comment": "동물농장ㄴㅇㄹ",
+      "createAt": "2020-20-20",
+      "id": 3
+    },
+    {
+      "nickname": "멍멍이",
+      "comment": "sdf",
+      "createAt": "2020-20-20",
+      "id": 4
+    },
+    {
+      "nickname": "멍멍이",
+      "comment": "s",
+      "createAt": "2020-20-20",
+      "id": 5
+    },
+    {
+      "nickname": "멍멍이",
+      "comment": "sdf",
+      "createAt": "2020-20-20",
+      "id": 6
+    },
+    {
+      "nickname": "멍멍이",
+      "comment": "sdf",
+      "createAt": "2020-20-20",
+      "id": 7
+    },
+    {
+      "comment": "sdf",
+      "id": 8
+    },
+    {
+      "id": 9
+    },
+    {
+      "id": 10
+    },
+    {
+      "comment": "s",
+      "id": 11
+    },
+    {
+      "id": 12
+    },
+    {
+      "id": 13
+    },
+    {
+      "id": 14
+    },
+    {
+      "id": 15
+    },
+    {
+      "comment": "sdf",
+      "id": 16
+    },
+    {
+      "id": 17
+    },
+    {
+      "nickname": "멍멍이",
+      "comment": "sdf",
+      "createAt": "2020-20-20",
+      "id": 18
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
