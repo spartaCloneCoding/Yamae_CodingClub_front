@@ -18,7 +18,7 @@ const StFooterContainer = styled.footer`
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex-grow: 1;
+  /* flex-grow: 1; */
 `;
 
 export default Footer;
