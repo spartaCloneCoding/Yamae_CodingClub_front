@@ -13,7 +13,8 @@ const CommunityItem = () => {
   ]);
 
   const Get_Posts = async () => {
-    const data = await axios.get("http://localhost:3001/posts");
+    const data = await axios.get("http://wetube-phenomenonlee.shop/posts");
+    console.log(data)
     setCommunity(data.data); // 서버로부터 fetching한 데이터를 useState의 state로 set
   };
   // mount가 됐을 때 함수를 실행하기 위한 useEffect

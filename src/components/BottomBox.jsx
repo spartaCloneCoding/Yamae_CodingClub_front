@@ -1,16 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 
-const Footer = () => {
+const BottomBox = () => {
   return (
-    <BottomBox>
+    <BottomBoxStyle>
       <h5>스파르타 코딩클럽 </h5>
       <h5>백엔드 프론트 앤드 클론코딩!</h5>
-    </BottomBox>
+    </BottomBoxStyle>
   );
 };
 
-const BottomBox = styled.div`
+const BottomBoxStyle = styled.div`
   width: inherit;
   background: rgb(25, 26, 27);
   padding: 26px 16px 100px;
@@ -28,4 +28,4 @@ const BottomBox = styled.div`
   }
 `;
 
-export default Footer;
+export default BottomBox;

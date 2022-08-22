@@ -10,8 +10,9 @@ const Detail = () => {
   const Get_Detail = async () => {
     const data = await axios.get(
       `http://wetube-phenomenonlee.shop/api/posts/${postId}`
-    );
-    setContents(data.data); // 서버로부터 fetching한 데이터를 useState의 state로 set
+      );
+      // console.log("detail", data);
+    setContents(data); // 서버로부터 fetching한 데이터를 useState의 state로 set
   };
 
   useEffect(() => {

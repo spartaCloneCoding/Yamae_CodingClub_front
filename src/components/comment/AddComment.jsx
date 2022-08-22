@@ -1,16 +1,19 @@
-import React, {useEffect} from "react";
+import React from "react";
 import axios from "axios";
 
 import styled from "styled-components";
-
+import {useParams} from "react-router-dom";
 const AddComment = () => {
+  const {postId} = useParams();
   const [addComment, setAddComment] = React.useState({
     nickname: "",
     comment: "",
     createAt: "",
   });
   const onSubmitHandler = (comments) => {
-    axios.post("http://localhost:3001/comments", comments).then((res) => {});
+    axios
+      .post(`http://wetube-phenomenonlee.shop/comments/${postId}`, comments)
+      .then((res) => {});
   };
 
   return (

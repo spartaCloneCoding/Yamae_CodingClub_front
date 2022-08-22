@@ -19,7 +19,7 @@ const Comment = () => {
     const data = await axios.get(
       `http://wetube-phenomenonlee.shop/api/comments/${postId}`
     );
-    setComment(data.data); // 서버로부터 페칭한 데이터를 useState의 state로 set
+    setComment("댓글", data.data); // 서버로부터 페칭한 데이터를 useState의 state로 set
   };
   // mount가 됐을 때 함수를 실행하기 위한 useEffect
   React.useEffect(() => {
