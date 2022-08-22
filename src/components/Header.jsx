@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { ReactComponent as Logo } from "../../src/logo.svg";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const Header = () => {
   const navigate = useNavigate();
+  const [headerStyle, setHeaderStyle] = useState(true);
+  const pathName = useLocation().pathname;
+  console.log(pathName)
+
+  useEffect(() => {
+    setHeaderStyle(false);
+  }, [])
 
   return (
-    <StHeader>
+    <StHeader headerStyle={pathName === "/" ? "sticky" : "static"}>
       <div>
         <StLeftContainer
           onClick={() => {
@@ -53,14 +62,13 @@ const Header = () => {
 const StHeader = styled.header`
   display: flex;
   justify-content: space-between;
-  border: 2px solid black;
+  /* border: 2px solid black; */
   padding: 10px;
   padding-bottom: 5.5px;
-  background-color: darkgray;
-  position: fixed;
-  width: 100%;
+  background-color: white;
+  position: ${(props) => props.headerStyle};
   top: 0;
-  left: 0;
+  width: 100%;
   box-sizing: border-box;
 
   & > div {
@@ -77,7 +85,7 @@ const StListContainer = styled.ul`
 
   & > li {
     cursor: pointer;
-    color: white;
+    color: black;
     transition: 0.5s;
     &:hover {
       font-weight: 900;
@@ -87,7 +95,8 @@ const StListContainer = styled.ul`
 
   & > div {
     cursor: pointer;
-    color: white;
+    color: black;
+    transition: 0.5s;
     &:hover {
       font-weight: 900;
       color: red;
