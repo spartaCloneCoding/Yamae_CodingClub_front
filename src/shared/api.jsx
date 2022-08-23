@@ -1,4 +1,5 @@
 import axios from "axios";
+// axios.defaults.withCredentials = true; 
 
 export const api = axios.create({
   baseURL: "http://wetube-phenomenonlee.shop/",
@@ -8,8 +9,11 @@ export const api = axios.create({
   },
 });
 
-api.interceptors.request.use(function (config) {
-  const accessToken = sessionStorage.getItem("token");
-  config.headers.common["authorization"] = `Bearer ${accessToken}`;
-  return config;
-});
+api.defaults.withCredentials = true;
+
+// api.interceptors.request.use(function (config) {
+//   const accessToken = sessionStorage.getItem("token");
+//   config.headers.common["authorization"] = `Bearer ${accessToken}`;
+//   return config;
+// });
+
