@@ -11,7 +11,7 @@ const Modal = () => {
   });
 
   const onSubmitHandler = (posts) => {
-    axios.post(`http://wetube-phenomenonlee.shop/api/posts`, posts);
+    axios.post("http://wetube-phenomenonlee.shop/api/posts", posts);
   };
 
   const onClickHandler = (e) => {
@@ -21,13 +21,13 @@ const Modal = () => {
 
   return (
     <Container>
-      <button
+      <WriteButton
         onClick={() => {
           setShow(true);
         }}
       >
         작성하기
-      </button>
+      </WriteButton>
       {show === true ? (
         <>
           <ModalWrite>
@@ -55,46 +55,59 @@ const Modal = () => {
                 });
               }}
             />
-            <button onClick={onClickHandler}>작성 완료</button>
-            <button>취소</button>
+            <ButtonGroup>
+              <button
+                onClick={() => {
+                  setShow(!show);
+                }}
+              >
+                취소
+              </button>
+              <button onClick={onClickHandler}>작성 완료</button>
+            </ButtonGroup>
           </ModalWrite>
-          <ModalShadow />
+          {/* <ModalShadow /> */}
         </>
       ) : null}
     </Container>
   );
 };
-const Button = styled.button``;
+const WriteButton = styled.button`
+  width: 400px;
+  height: 70px;
+`;
 
 const Container = styled.div``;
 
-const ModalShadow = styled.div`
-  content: "";
-  justify-content: center;
-  position: absolute;
-  width: 100vw;
-  height: 100vh;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  right: 0;
+// const ModalShadow = styled.div`
+//   content: "";
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   position: absolute;
+//   width: 100vw;
+//   height: 100vh;
+//   left: 0;
+//   top: 0;
+//   bottom: 0;
+//   right: 0;
 
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 0;
-`;
+//   background-color: rgba(0, 0, 0, 0.5);
+//   z-index: 0;
+// `;
 
 const ModalWrite = styled.div`
   display: flex;
   flex-direction: column;
   padding: 100px 50px;
   position: absolute;
-  border: 1px solid #222;
+  /* border: 0.3px solid #222; */
   z-index: 10;
   border-radius: 10px;
-  border: 0.5ps solid lightgray;
+  border: 0.3px solid lightgray;
   background: #fff;
   left: 50%;
-  top: -400%;
+  top: -100%;
   transform: translate(-50%, -50%);
   margin-bottom: 100px;
 
@@ -111,6 +124,20 @@ const ModalWrite = styled.div`
   .content {
     height: 400px;
   }
+`;
+
+const ButtonGroup = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 15px;
+
+  button {
+    width: 200px;
+    margin: 7px;
+  }
+  /* justify-content: space-between; */
 `;
 
 export default Modal;
