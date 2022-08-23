@@ -1,6 +1,6 @@
 import axios from "axios";
-// axios.defaults.withCredentials = true; 
-
+// 54.180.113.36
+//http://wetube-phenomenonlee.shop/
 export const api = axios.create({
   baseURL: "http://wetube-phenomenonlee.shop/",
   headers: {

@@ -10,6 +10,7 @@ const Header = () => {
   const [headerStyle, setHeaderStyle] = useState(true);
   const pathName = useLocation().pathname;
 
+
   useEffect(() => {
     setHeaderStyle(false);
   }, [])

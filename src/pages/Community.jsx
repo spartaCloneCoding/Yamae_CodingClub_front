@@ -2,12 +2,12 @@ import React from "react";
 // import axios from "axios";
 // import { api } from "../shared/api.jsx";
 
-import Modal from "../components/community/Modal.jsx";
+import Modal from "../components/community/WriteModal.jsx";
 import styled from "styled-components";
 import Line from "../components/Line";
-import BottomBox from "../components/BottomBox";
+// import BottomBox from "../components/BottomBox";
 import CommunityItem from "../components/community/CommunityItem";
-
+import NoticeModal from "../components/community/NoticeModal";
 const Community = () => {
   //모달 기능을 작동시키기 위한 useState
   // const [show, setShow] = React.useState(false);
@@ -22,11 +22,10 @@ const Community = () => {
         </NoticeBox>
         <TopBox>
           <h2>
-            <p>dfdf</p>
+            <p>스파르타 코딩클럽에 오신걸 환영합니다.</p>
             <p>자유게시판</p>
-            <p>추가기능 자유게시판 이용안내 (modal)</p>
+            <NoticeModal />
           </h2>
-          <button></button>
         </TopBox>
         <div>
           <Content>
@@ -34,20 +33,14 @@ const Community = () => {
           </Content>
           <Footer>
             <FooterBox>
-              <p>스파르타</p>
-
-              {/* <button
-                onClick={() => {
-                  setShow(!show);
-                }}
-              >
-                작성하기
-              </button> */}
+              <div>
+                <p>코딩에 관한 주제라면 누구든 글을 남길 수 있어요!🤣</p>
+              </div>
               <Modal />
             </FooterBox>
           </Footer>
-          <BottomBox />
         </div>
+        {/* <BottomBox /> */}
       </Container>
     </div>
   );
@@ -62,11 +55,28 @@ const NoticeBox = styled.div`
 const TopBox = styled.div`
   background-color: white;
   border: 0px;
+  padding: 10px 50px 10px 50px;
+  p {
+    animation-duration: 3s;
+    animation-name: slidein;
+  }
 
-  button {
+  @keyframes slidein {
+    from {
+      margin-left: 100%;
+      width: 300%;
+    }
+
+    to {
+      margin-left: 0%;
+      width: 100%;
+    }
+  }
+
+  /* button {
     background-color: whithe;
     border: transparent;
-  }
+  } */
 `;
 
 const Content = styled.div`
@@ -74,38 +84,49 @@ const Content = styled.div`
   /* display: none; */
   width: 862px px;
   padding: 50px 50px 100px 50px;
-  background-color: #eaebdd;
+  background-color: #f4f5f6;
 `;
 
 const Footer = styled.div`
   background-color: white;
   position: sticky;
-  /* max-width: 1300px;
-  width: 100%; */
+  max-width: 1200vw;
+  width: 100%;
+
   width: inherit;
   left: 0;
   right: 0;
   bottom: 0;
-  height: 6rem;
+  /* height: 6rem; */
   box-shadow: 0 -4px 20px 0 rgb(0 0 0 / 8%);
 
   button {
     border-radius: 8px;
+    justify-content: center;
     font-size: 16px;
-    height: 50px;
+
     border: none;
     font-weight: 700;
     color: rgb(255, 255, 255);
     background-color: rgb(232, 52, 78);
-    width: 150px;
-    opacity: 1;
+    width: 300px;
+    height: 80px;
+    opacity: 0.9;
   }
 `;
 
 const FooterBox = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 20px;
+  align-items: center;
+  padding: 20px 120px 20px 120px;
+  div {
+    box-sizing: border-box;
+    letter-spacing: normal;
+  }
+  br {
+    /* padding-top: 40px; */
+  }
 `;
 
 // const Nick = styled.div`
