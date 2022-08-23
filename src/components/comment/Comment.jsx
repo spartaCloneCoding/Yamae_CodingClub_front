@@ -5,23 +5,25 @@ import styled from "styled-components";
 import {useParams} from "react-router-dom";
 
 import AddComment from "./AddComment";
+// import userEvent from "@testing-library/user-event";
 const Comment = () => {
-  const {postId} = useParams();
-  const [comment, setComment] = React.useState({
-    postId: 0,
-    nickname: "",
-    createAt: "",
-    comment: "",
-  });
+  const {id} = useParams();
+  const [comment, setComment] = React.useState([]);
+  // const [comment, setComment] = React.useState({
+  //   postId: 0,
+  //   nickname: "",
+  //   createAt: "",
+  //   comment: "",
+  // });
 
   const Get_Comment = async () => {
     const res = await axios.get(
       // "http://54.180.113.36/api/posts"
-      // "http://wetube-phenomenonlee.shop/api/comments/1"
-      `http://wetube-phenomenonlee.shop/api/comments/${postId}`
+      "http://wetube-phenomenonlee.shop/api/comments/1"
+      // `http://wetube-phenomenonlee.shop/api/comments/${id}`
     );
-    console.log(res);
-    setComment("댓글", res); // 서버로부터 페칭한 데이터를 useState의 state로 set
+    setComment(res.data); // 서버로부터 페칭한 데이터를 useState의 state로 set
+    console.log(res.data)
   };
   React.useEffect(() => {
     Get_Comment();
@@ -31,16 +33,28 @@ const Comment = () => {
       💬 댓글
       <ContentBox>
         {/* <NickName>{comment.nickname}</NickName>
-        <CreatAt>{comment.createAt}</CreatAt>
+        <CreatAt>{comment.createdAt}</CreatAt>
         <p>{comment.comment}</p> */}
-        {/* 
-        {comment.map((comments) => {
+        
+            {/* {comments} */}
+
+        {comment?.map((comments) => {
           return (
-            <div key={comments.id}>
-            
+            <div key={comments}>
+            {comments.createdAt}
+            {comments.comment}
             </div>
           );
-        })} */}
+        })}
+        {/* {comment !== "" ? comment.map((comments) => {
+          return (
+            <div key={comments.id}>
+            {comments.createdAt}
+            {comments.comment}
+            </div>
+          );
+        })
+        :null} */}
       </ContentBox>
       <AddComment />
     </Container>
