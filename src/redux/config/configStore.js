@@ -1,10 +1,14 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
+import community from "../modules/community";
+import loginReducer from "../modules/loginSlice";
+import signupReducer from "../modules/signupSlice";
+
 
 const middlewares = [thunk];
 const rootReducer = combineReducers({
-  // login: loginReducer,
-  // signup: signupReducer,
+  login: loginReducer,
+  signup: signupReducer,
 });
 
 const store = configureStore({
