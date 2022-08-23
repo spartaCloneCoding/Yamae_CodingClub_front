@@ -1,8 +1,8 @@
 import React from "react";
-import styled from "styled-components"
-import { ReactComponent as Logo } from "../src_assets/logo_chlidren.svg";
-import signupImg from "../src_assets/signupImg.png"
-import kakao from "../src_assets/kakao.svg"
+import styled from "styled-components";
+import {ReactComponent as Logo} from "../src_assets/logo_chlidren.svg";
+import signupImg from "../src_assets/signupImg.png";
+import kakao from "../src_assets/kakao.svg";
 
 const SignUp = () => {
   return (
@@ -12,29 +12,27 @@ const SignUp = () => {
           <Logo />
         </StLogoDiv>
         <StImgDiv>
-          <img src = {signupImg} alt="이미지를 불러 올 수 없네여"/>
+          <img src={signupImg} alt="이미지를 불러 올 수 없네여" />
         </StImgDiv>
         <StTextDiv>
-          <h3>
-          반갑습니다!
-          </h3>
+          <h3>반갑습니다!</h3>
           <p>완주까지 함께 하는 야매코딩클럽</p>
         </StTextDiv>
         <label>이메일</label>
         <input type="text" placeholder="이메일을 입력해주세요." />
         <button>중복확인</button>
         <label>비밀번호</label>
-        <input type="text" placeholder="4자 이상, 숫자 영문자 조합"/>
+        <input type="text" placeholder="4자 이상, 숫자 영문자 조합" />
         <label>비밀번호 확인</label>
-        <input type="text" placeholder="4자 이상, 숫자 영문자 조합"/>
+        <input type="text" placeholder="4자 이상, 숫자 영문자 조합" />
         <label>닉네임</label>
-        <input type="text" placeholder="닉네임"/>
+        <input type="text" placeholder="닉네임" />
         <button>중복확인</button>
         <button>가입하기</button>
       </StloginLayout>
-    </StContainer>  
-  )
-}
+    </StContainer>
+  );
+};
 
 const StContainer = styled.div`
   display: flex;
@@ -68,7 +66,7 @@ const StImgDiv = styled.div`
 
 const StTextDiv = styled.div`
   text-align: center;
-  
+
   & > h3 {
     text-align: center;
     font-size: 25px;

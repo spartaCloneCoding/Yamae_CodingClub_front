@@ -9,7 +9,7 @@ const Header = () => {
   const navigate = useNavigate();
   const [headerStyle, setHeaderStyle] = useState(true);
   const pathName = useLocation().pathname;
-  console.log(pathName)
+  // console.log(pathName)
 
   useEffect(() => {
     setHeaderStyle(false);
