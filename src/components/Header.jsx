@@ -4,76 +4,104 @@ import { ReactComponent as Logo } from "../../src/logo.svg";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logOutUser, __checkToken } from "../redux/modules/loginSlice";
 
 const Header = () => {
+  const checktoken = useSelector((state) => state);
+  console.log(checktoken)
+  const sessionToken = sessionStorage.getItem("token");
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [headerStyle, setHeaderStyle] = useState(true);
   const pathName = useLocation().pathname;
 
-
   useEffect(() => {
     setHeaderStyle(false);
-  }, [])
+  }, []);
+
+  const logOut = () => {
+    alert("정상 로그아웃 되었습니다.");
+    sessionStorage.removeItem("token");
+    dispatch(logOutUser());
+    navigate("/");
+  };
+
+  React.useEffect(() => {
+    if (sessionToken) {
+      dispatch(__checkToken());
+    }
+  }, [sessionToken]);
+
 
   return (
     <StHeader headerStyle={pathName === "/" ? "sticky" : "static"}>
-      <div>
-        <StLeftContainer
-          onClick={() => {
-            navigate("/");
-          }}
-        >
-          <Logo />
-        </StLeftContainer>
-        <StListContainer>
-          <div>수업탐색</div>
-          <li
+      <StHeaderContainer>
+        <div>
+          <StLeftContainer
             onClick={() => {
-              navigate("/inquiry");
+              navigate("/");
             }}
           >
-            문의하기
-          </li>
-          <li>수강생 후기</li>
-          <li>블로그</li>
-          <li
+            <Logo />
+          </StLeftContainer>
+          <StListContainer>
+            <div>수업탐색</div>
+            <li
+              onClick={() => {
+                navigate("/inquiry");
+              }}
+            >
+              문의하기
+            </li>
+            <li>수강생 후기</li>
+            <li>블로그</li>
+            <li
+              onClick={() => {
+                navigate("/community");
+              }}
+            >
+              커뮤니티
+            </li>
+            <li>기업교육</li>
+          </StListContainer>
+        </div>
+        <StRightContainer>
+          <StBtn
             onClick={() => {
-              navigate("/community");
+              navigate("/login");
             }}
           >
-            커뮤니티
-          </li>
-          <li>기업교육</li>
-        </StListContainer>
-      </div>
-      <StRightContainer>
-        <StBtn
-          onClick={() => {
-            navigate("/login");
-          }}
-        >
-          로그인
-        </StBtn>
-      </StRightContainer>
+            로그인
+          </StBtn>
+        </StRightContainer>
+      </StHeaderContainer>
     </StHeader>
   );
 };
 
-const StHeader = styled.header`
+const StHeaderContainer = styled.div`
+  max-width: 1230px;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   /* border: 2px solid black; */
-  padding: 10px;
+  padding: 12px 18px;
   padding-bottom: 5.5px;
-  background-color: white;
-  position: ${(props) => props.headerStyle};
-  top: 0;
   width: 100%;
   box-sizing: border-box;
 
   & > div {
     display: flex;
   }
+`;
+
+const StHeader = styled.header`
+  background-color: white;
+  z-index: 100;
+  position: ${(props) => props.headerStyle};
+  top: 0;
 `;
 const StLeftContainer = styled.div``;
 
@@ -87,6 +115,7 @@ const StListContainer = styled.ul`
     cursor: pointer;
     color: black;
     transition: 0.5s;
+    font-weight: 500;
     &:hover {
       font-weight: 900;
       color: red;
@@ -97,6 +126,7 @@ const StListContainer = styled.ul`
     cursor: pointer;
     color: black;
     transition: 0.5s;
+    font-weight: 500;
     &:hover {
       font-weight: 900;
       color: red;
@@ -113,6 +143,7 @@ const StBtn = styled.button`
   color: white;
   padding: 14px 21px;
   font-size: 14px;
+  font-weight: 900;
   border-radius: 50px;
   border: none;
   cursor: pointer;

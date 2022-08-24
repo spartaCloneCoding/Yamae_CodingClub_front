@@ -6,9 +6,13 @@ import { __login } from "../../redux/modules/loginSlice";
 import { __checkUsername } from "../../redux/modules/signupSlice";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+// import jwt_decode from "jwt-decode";
 
 const LoginForm = () => {
   const checkUserName = useSelector((state) => state);
+  const token = window.localStorage.getItem('token');
+  // const payload = jwt_decode(token);
+  console.log(token)
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [switches, setSwitches] = useState(false);
@@ -31,8 +35,8 @@ const LoginForm = () => {
     if (loginState.type === "log/LOGIN_LOG/rejected") {
       alert("아이디 혹은 비밀번호가 틀렸습니다.");
     }
-    if (loginState.result) {
-      alert(`${loginState.nickname} 님 환영합니다.`);
+    if (loginState.type === "log/LOGIN_LOG/fulfilled") {
+      // alert(`${payload.userNickname} 님 환영합니다.`);
       navigate("/");
     }
   };
@@ -62,6 +66,7 @@ const LoginForm = () => {
       &nbsp;카카오로 1초만에 시작 안됨
       </button> 
     <p className="btn" onClick={onToggleHandler}>이메일로 시작하기</p> 
+    <a href="http://wetube-phenomenonlee.shop/api/users/auth/kakao"> 일단 카카오 로그인</a>
     {switches? (    
     <>
       <label>이메일</label> 
