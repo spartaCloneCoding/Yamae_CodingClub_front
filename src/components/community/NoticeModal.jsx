@@ -35,6 +35,7 @@ const NoticeModal = () => {
 
 const Container = styled.div`
   text {
+    cursor: pointer;
     font-size: 14px;
     color: red;
   }

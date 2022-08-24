@@ -11,12 +11,12 @@ const CommunityItem = () => {
       content: "",
     },
   ]);
-
+// __GET_POSTS
   const Get_Posts = async () => {
-    const res = await axios.get("http://wetube-phenomenonlee.shop/api/posts");
-    setCommunity(res.data.result); // 서버로부터 fetching한 데이터를 useState의 state로 set
+    // const res = await axios.get("http://wetube-phenomenonlee.shop/api/posts");
+    const res = await axios.get("http://54.180.113.36/api/posts");
+    setCommunity(res.data.result); 
   };
-  // mount가 됐을 때 함수를 실행하기 위한 useEffect
 
   React.useEffect(() => {
     Get_Posts();
@@ -27,23 +27,21 @@ const CommunityItem = () => {
       {community.createData}
       {community?.map((post) => (
         <ContentBox key={post.id}>
-          <Nick>sdf{post.nickname}</Nick>
+          <Nick>{post.nickname}</Nick>
           <h6>{post.createdAt}</h6>
           <BodyText
             onClick={() => {
               navigate(`/detail/${post.id}`);
             }}
           >
-            sdfsdfsdf
             <div>
               <h2>{post.title}</h2>
               <h4>{post.content}</h4>
             </div>
           </BodyText>
           <LikeBox>
-            <p>💬 3</p>
-            {/* <p>{post.like}</p> */}
-            <p>❤️10</p>
+            <p>💬 {post.cmtNum}</p>
+            <p>❤️{post.like}</p>
           </LikeBox>
         </ContentBox>
       ))}
@@ -80,7 +78,9 @@ const LikeBox = styled.div`
     opacity: 0.9;
   }
 `;
-const BodyText = styled.div``;
+const BodyText = styled.div`
+cursor: pointer;
 
+`;
 const CtreatAt = styled.div``;
 export default CommunityItem;
