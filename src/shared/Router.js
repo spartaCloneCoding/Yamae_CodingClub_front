@@ -9,20 +9,22 @@ import Edit from "../pages/Edit";
 import Community from "../pages/Community";
 import Header from "../components/Header";
 import BottomBox from "../components/BottomBox";
+import Layout from "../components/Layout";
+
 const Router = () => {
   return (
     <BrowserRouter>
       <Header />
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/detail/:id" element={<Detail />} />
-        <Route path="/edit/:id" element={<Edit />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/community" element={<Community />} />
-        <Route path="/inquiry" element={<Inquiry />} />
-      </Routes>
-      <BottomBox />
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/detail/:id" element={<Detail />} />
+          <Route path="/edit/:id" element={<Edit />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/community" element={<Community />} />
+          <Route path="/inquiry" element={<Inquiry />} />
+        </Routes>
+        <BottomBox />
     </BrowserRouter>
   );
 };
