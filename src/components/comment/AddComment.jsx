@@ -5,7 +5,10 @@ import styled from "styled-components";
 import {useParams} from "react-router-dom";
 const AddComment = () => {
   const {postId} = useParams();
-  const [banJjack, setBanJjack] = React.useState(false);
+  const [showComment, setShowComment] = React.useState(false);
+  const [input, setInput] = React.useState({
+    comment: "",
+  });
   const [addComment, setAddComment] = React.useState({
     nickname: "",
     comment: "",
@@ -13,12 +16,13 @@ const AddComment = () => {
   });
   const onSubmitHandler = (comments) => {
     axios
-      .post(`http://wetube-phenomenonlee.shop/comments/${postId}`, comments)
+    // .post(`http://wetube-phenomenonlee.shop/comments/${postId}`, comments)
+      // .post(`http://54.180.113.36/api/comments`, comments)
       .then(() => {
-        setBanJjack(!banJjack);
+        setShowComment(!showComment);
       });
+      setInput("")
   };
-
   return (
     <>
       <FormInput
@@ -27,24 +31,29 @@ const AddComment = () => {
           if (addComment.comment.trim() === "") {
             return alert("댓글을 입력해주세요.");
           }
-
           onSubmitHandler(addComment);
         }}
       >
         <InputGroup>
           <input
             type="text"
+            className="comment"
             onChange={(e) => {
               const {value} = e.target;
               setAddComment({
                 ...addComment,
                 comment: value,
               });
+            setInput(e.target.value);
+              
             }}
-            value={addComment.comment}
+            // value={addComment.comment}
+            value={input}
             placeholder="댓글을 작성하세요"
           />
-          <button type="submit">추가하기</button>
+          <button 
+          type="submit"
+          >추가하기</button>
         </InputGroup>
       </FormInput>
     </>
@@ -73,6 +82,10 @@ const InputGroup = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 10px;
+  
+  button{
+    cursor: pointer;
+  }
 `;
 
 export default AddComment;

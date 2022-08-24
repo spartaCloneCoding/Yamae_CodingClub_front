@@ -1,0 +1,1 @@
+export const TestServerUrl = process.env.REACT_APP_URL_TEST

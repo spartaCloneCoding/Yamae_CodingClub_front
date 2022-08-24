@@ -15,11 +15,13 @@ const Community = () => {
 
   return (
     <div>
-      {/* {show === true ? <Modal /> : null} */}
       <Container>
         <NoticeBox>
-          <Line text="자유게시판" />
+          {/* <Line text="자유게시판" /> */}
         </NoticeBox>
+        <TopBlock>
+            자유게시판
+        </TopBlock>
         <TopBox>
           <h2>
             <p>스파르타 코딩클럽에 오신걸 환영합니다.</p>
@@ -40,7 +42,6 @@ const Community = () => {
             </FooterBox>
           </Footer>
         </div>
-        {/* <BottomBox /> */}
       </Container>
     </div>
   );
@@ -48,6 +49,27 @@ const Community = () => {
 const Container = styled.div`
   box-sizing: border-box;
 `;
+
+const TopBlock = styled.div`
+    border-bottom: 1px solid #f1f1f1;
+    color: #505253;
+    padding: 0 10px;
+    white-space: nowrap;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+`
 const NoticeBox = styled.div`
   display: flex;
 `;
@@ -101,6 +123,7 @@ const Footer = styled.div`
   box-shadow: 0 -4px 20px 0 rgb(0 0 0 / 8%);
 
   button {
+    cursor: pointer;
     border-radius: 8px;
     justify-content: center;
     font-size: 16px;

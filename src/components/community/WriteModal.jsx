@@ -2,16 +2,20 @@ import React from "react";
 import axios from "axios";
 // import { api } from "../../shared/api";
 import styled from "styled-components";
-// import {useParams} from "react-router-dom";
 const Modal = () => {
   const [show, setShow] = React.useState(false);
+  const [showCotent, setShowContent] = React.useState(false);
   const [posts, setPosts] = React.useState({
-    title: "물어볼게 있습니다!",
-    content: "항해99를 하고싶은데, 코딩에 코자도 모르는 사람도 가능한가요?",
+    title: "",
+    content: "",
   });
-
+//__POST_POST
   const onSubmitHandler = (posts) => {
-    axios.post("http://wetube-phenomenonlee.shop/api/posts", posts);
+    axios.post("http://54.180.113.36/api/posts", posts)
+    // axios.post("http://wetube-phenomenonlee.shop/api/posts", posts);
+    .then(()=>{
+      setShowContent(!showCotent);
+    })
   };
 
   const onClickHandler = (e) => {
@@ -22,8 +26,9 @@ const Modal = () => {
   return (
     <Container>
       <WriteButton
+      type="button"
         onClick={() => {
-          setShow(true);
+          setShow(!show);
         }}
       >
         작성하기
@@ -58,7 +63,7 @@ const Modal = () => {
             <ButtonGroup>
               <button
                 onClick={() => {
-                  setShow(!show);
+                  setShow(false);
                 }}
               >
                 취소
@@ -77,7 +82,7 @@ const WriteButton = styled.button`
   height: 70px;
 `;
 
-const Container = styled.div``;
+const Container = styled.form``;
 
 // const ModalShadow = styled.div`
 //   content: "";
@@ -107,7 +112,7 @@ const ModalWrite = styled.div`
   border: 0.3px solid lightgray;
   background: #fff;
   left: 50%;
-  top: -100%;
+  top: -200%;
   transform: translate(-50%, -50%);
   margin-bottom: 100px;
 
@@ -115,7 +120,7 @@ const ModalWrite = styled.div`
     border-radius: 10px;
     border: 0.5px solid lightgray;
 
-    opacity: 0.5;
+    opacity: 0.9;
     width: 600px;
     height: 35px;
 
