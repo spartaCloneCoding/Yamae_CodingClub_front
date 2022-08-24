@@ -17,7 +17,7 @@ const AddComment = () => {
   const onSubmitHandler = (comments) => {
     axios
     // .post(`http://wetube-phenomenonlee.shop/comments/${postId}`, comments)
-      .post(`http://54.180.113.36/api/comments`, comments)
+      // .post(`http://54.180.113.36/api/comments`, comments)
       .then(() => {
         setShowComment(!showComment);
       });
