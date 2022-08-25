@@ -65,15 +65,24 @@ const LoginForm = () => {
 
   return (
     <StLoginContainer onSubmit={submitLogin}>
-      <a href="http://wetube-phenomenonlee.shop/api/users/auth/kakao"> 
-        <button className="kakao">
-          <img className="kakaoImg" src = {kakao} alt="이미지를 불러 올 수 없"/>
-          &nbsp;카카오로 1초만에 시작하기
-        </button> 
-      </a>
-      <a href="http://wetube-phenomenonlee.shop/api/users/auth/kakao"> 
+
+      <label htmlFor="kakaoatag" className="kakao">
+        <img className="kakaoImg" src = {kakao} alt="이미지를 불러 올 수 없"/>
+        &nbsp;카카오로 1초만에 시작하기
+      </label> 
+      <button onClick={(e)=>{
+        e.preventDefault()
+        console.log("확인")
+        window.location.href="http://wetube-phenomenonlee.shop/api/users/auth/kakao"
+      }} id="kakaoatag" hidden > 
       일단 카카오 로그인
-      </a>
+      </button>
+      {/* <a onClick={()=>{
+        console.log("확인")
+      }} id="kakaoatag" hidden href="http://wetube-phenomenonlee.shop/api/users/auth/kakao"> 
+      일단 카카오 로그인
+      </a> */}
+
     <p className="btn" onClick={onToggleHandler}>이메일로 시작하기</p> 
     {switches? (    
     <>
@@ -136,9 +145,22 @@ const StLoginContainer = styled.form`
     }
   }
 
+
  .kakao {
     background-color: #ffe500;
     color: black;
+    /* width: 486px; */
+    padding: 18px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    text-align: center;
+
+    & > .kakaoImg {
+      transform: translate(-2px, 5px);
+    }
   }
 
   & > p {
