@@ -4,35 +4,31 @@ import {useParams} from "react-router-dom";
 import styled from "styled-components";
 import {api} from "../shared/api";
 const Like = () => {
-  const {id} = useParams();
-  const [likeOn, setLikeOn] = React.useState([]);
-  console.log("함수밖");
-  const Like_On_Click = (likeOn) => {
-    const {id} = useParams();
-    console.log("함수안");
+  const {postId} = useParams();
+  const [likeOn, setLikeOn] = React.useState(false);
+  // const [likeNum, setLikeNum] = React.useState("");
+
+  const Like_On_Click = () => {
     if (!likeOn) {
-      const res = api.post(`api/posts/${id}`, likeOn);
-      console.log(res.data.data.result);
+      api.post(`api/posts/${postId}`, true);
+      setLikeOn(!likeOn);
+    } else {
+      api.delete(`api/posts${postId}`, false);
       setLikeOn(!likeOn);
     }
-    // else {
-    //   api.delete(`/posts`, false);
-    //   setLikeOn(likeOn);
-    // }
   };
+  //{likeOn : true}
+  //true
+  //상돈님께 여쭤보기
   return (
     <div>
       <Button
-        onClick={(likeOn) => {
-          Like_On_Click(likeOn);
+        onClick={() => {
+          Like_On_Click();
         }}
       >
         {likeOn ? "❤️" : "🤍"}
       </Button>
-      0
-      {likeOn?.map((like) => {
-        return <div>{like.title}</div>;
-      })}
     </div>
   );
 };

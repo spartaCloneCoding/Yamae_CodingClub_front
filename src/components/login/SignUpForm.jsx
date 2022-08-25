@@ -115,6 +115,7 @@ const SignUpForm = () => {
       />
       <label>닉네임</label>
 
+
       <input 
           id="nickname"
           placeholder="2자이상 10자 이하, 한글과 영어로만 작성" 
@@ -122,11 +123,9 @@ const SignUpForm = () => {
           pattern="^[a-zA-Zㄱ-힣]{2,10}$"
           onChange={changeInput}
         />
+
       {/* <button className="checkbtn" onClick={(CheckNick)}>중복확인</button> */}
-      <button
-        type="submit"
-      >
-        가입하기</button>
+      <button type="submit">가입하기</button>
     </StLoginContainer>
   );
 };
