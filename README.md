@@ -19,7 +19,6 @@
 ## Technical Stacks
 
 
-NODEJS, EXPRESS, SQL을 활용합니다
 
 ### 기술선정이유
 
