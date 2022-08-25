@@ -10,20 +10,5 @@
 |팀원|역할분담|
 |------|------|
 |최락현|로그인, 회원가입, 소셜로그인 기능구현 |
-|김영건|comment CRUD API, 서버배포 |
+|김영건|comment CRUD , 서버배포 |
 
-
-## Environment
-
-
-## Technical Stacks
-
-
-
-### 기술선정이유
-
-
- ## 라이브 러리|Library
-
-
-## 트러블슈팅
