@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { api } from "../../shared/api";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {api} from "../../shared/api";
 
 export const __signup = createAsyncThunk(
   "signup/SIGNUP_LOG",
@@ -10,7 +10,6 @@ export const __signup = createAsyncThunk(
     return response.data.result;
   }
 );
-
 
 export const __checkUsername = createAsyncThunk(
   "signup/CHECKID_LOG",
@@ -72,5 +71,5 @@ const signupSlice = createSlice({
   },
 });
 
-export const { changeCheckName, changeCheckNick } = signupSlice.actions;
+export const {changeCheckName, changeCheckNick} = signupSlice.actions;
 export default signupSlice.reducer;

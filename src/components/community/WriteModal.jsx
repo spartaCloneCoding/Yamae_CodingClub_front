@@ -1,21 +1,17 @@
 import React from "react";
-import axios from "axios";
-// import { api } from "../../shared/api";
 import styled from "styled-components";
+import {api} from "../../shared/api";
 const Modal = () => {
   const [show, setShow] = React.useState(false);
-  const [showCotent, setShowContent] = React.useState(false);
   const [posts, setPosts] = React.useState({
     title: "",
     content: "",
   });
-//__POST_POST
+
+  //__POST_POST
   const onSubmitHandler = (posts) => {
-    axios.post("http://54.180.113.36/api/posts", posts)
-    // axios.post("http://wetube-phenomenonlee.shop/api/posts", posts);
-    .then(()=>{
-      setShowContent(!showCotent);
-    })
+    api.post("api/posts", posts);
+    sessionStorage.getItem("token");
   };
 
   const onClickHandler = (e) => {
@@ -26,7 +22,7 @@ const Modal = () => {
   return (
     <Container>
       <WriteButton
-      type="button"
+        type="button"
         onClick={() => {
           setShow(!show);
         }}
@@ -77,29 +73,11 @@ const Modal = () => {
     </Container>
   );
 };
+const Container = styled.form``;
 const WriteButton = styled.button`
   width: 400px;
   height: 70px;
 `;
-
-const Container = styled.form``;
-
-// const ModalShadow = styled.div`
-//   content: "";
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   position: absolute;
-//   width: 100vw;
-//   height: 100vh;
-//   left: 0;
-//   top: 0;
-//   bottom: 0;
-//   right: 0;
-
-//   background-color: rgba(0, 0, 0, 0.5);
-//   z-index: 0;
-// `;
 
 const ModalWrite = styled.div`
   display: flex;

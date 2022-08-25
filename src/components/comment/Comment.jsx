@@ -1,95 +1,101 @@
 import React from "react";
-import axios from "axios";
-
 import styled from "styled-components";
 import {useParams} from "react-router-dom";
-import AddComment from "./AddComment";
+// import AddComment from "./AddComment";
+import {api} from "../../shared/api";
 // import userEvent from "@testing-library/user-event";
-const Comment = () => {
-  const {postId} = useParams();
+const Comment = ({comments}) => {
+  const {id} = useParams();
+  // const {commentId} = useParams();
   const [comment, setComment] = React.useState([]);
+  // 수정
   const [editInput, setEditInput] = React.useState(false);
   const [editComment, setEditComment] = React.useState({
     comment: "",
   });
 
+  // console.log(commentId);
+  // GET_COMMENT
+  // const GET_COMMENT = async () => {
+  //   const res = await api.get(`api/comments/${id}`);
+  //   setComment(res.data);
+  // };
 
-//__GET_COMMENT
-  const __GetComment = async () => {
-    const res = await axios.get(
-      `http://54.180.113.36/api/comments/2`
-      // "http://wetube-phenomenonlee.shop/api/comments/1"
-      // `http://wetube-phenomenonlee.shop/api/comments/${postId}`
-    );
-    setComment(res.data);
+  // DELELTE_COMMENT
+  const Del_COMMENT = (commentId) => {
+    api.delete(`api/comments/${commentId}`);
+    if (Del_COMMENT == false) {
+      return alert("본인만 삭제가능");
+    }
   };
-//__DELELTE_COMMENT
-  const __DelComment = (commentId) => {
-    axios.delete(`http://wetube-phenomenonlee.shop/api/comments/${commentId}`) 
-  }
 
-  //__PATCH_COMMENT
-  const __EditComment = ((commentId, editComment) => {
-    axios.patch(`http://wetube-phenomenonlee.shop/api/comments/${commentId}`, editComment)
+  // PATCH_COMMENT
+  const EDIT_COMMENT = (commentId, editComment) => {
+    api.patch(`api/comments/${commentId}`, editComment);
+  };
 
-  })
+  // React.useEffect(() => {
+  //   GET_COMMENT();
+  // }, []);
 
-  React.useEffect(() => {
-    __GetComment();
-  }, []);
+  // GET_COMMENT();
+  console.log("수정님", comments);
   return (
     <Container>
       💬 댓글
-        {comment?.map((comments) => {
-          return (
-              <>
-            {editInput !== true ? (
-            <ContentBox>
-            <div key={comments}>
+      <>
+        {editInput !== true ? (
+          <ContentBox>
             <CreatAt>{comments.createdAt}</CreatAt>
             <NickName>{comments.User.nickname}</NickName>
             <p>{comments.comment}</p>
-            {/* {comments.cmtNum} */}
-            </div>
+            {/* {comment.cmtNum} */}
             <ButtonGroup>
               <button
-              type="button"
-              onClick={() => {setEditInput(!editInput)}}>✍🏼</button>
-              <button 
-              type="button"
-              onClick={() => {__DelComment(comment.id)}}
-              >❌</button>
+                type="button"
+                onClick={() => {
+                  setEditInput(!editInput);
+                }}
+              >
+                ✍🏼
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  Del_COMMENT(comments.id);
+                }}
+              >
+                ❌
+              </button>
             </ButtonGroup>
-            </ContentBox>
-            ) : (
-              <>
-              <div>
-                
-                <input
-            type="text"
-            onChange={(e) => {
-              const {value} = e.target;
-              setEditComment({
-                ...comment,
-                comment: value,
-              });
-            }}
-            placeholder={comments.comment}
+          </ContentBox>
+        ) : (
+          <>
+            <div>
+              <input
+                type="text"
+                onChange={(e) => {
+                  const {value} = e.target;
+                  setEditComment({
+                    ...editComment,
+                    comment: value,
+                  });
+                }}
+                placeholder={comment.comment}
               />
               <button
-              type="button"
-              onClick={() => {
-                __EditComment()
-                setEditInput(!editInput)}}>완료</button>
-              </div>
-              </>
-            )}
-            </>
-          );
-        })}
- 
-      
-      <AddComment />
+                type="button"
+                onClick={() => {
+                  EDIT_COMMENT(editComment);
+                  setEditInput(!editInput);
+                }}
+              >
+                완료
+              </button>
+            </div>
+          </>
+        )}
+      </>
     </Container>
   );
 };
@@ -98,13 +104,13 @@ const Container = styled.div`
   padding: 40px 0 120px;
   border-top: 1px solid #eaebed;
   border-radius: 10px;
-  input{
+  input {
     border: 1px solid lightgray;
-  border-radius: 10px;
-  opacity: 0.2px;
-  width: 890px;
-  height: 30px;
-  margin-top: 20px;
+    border-radius: 10px;
+    opacity: 0.2px;
+    width: 890px;
+    height: 50px;
+    margin-top: 20px;
   }
 `;
 
@@ -122,14 +128,11 @@ const ButtonGroup = styled.div`
   flex-direction: row;
   align-items: center;
 
-button{
+  button {
     cursor: pointer;
     border: transparent;
-    margin: 5px;
-    width: 40px;
-    height: 40px;
   }
-`
+`;
 const NickName = styled.div``;
 const CreatAt = styled.div``;
 

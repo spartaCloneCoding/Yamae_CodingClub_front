@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import styled from "styled-components";
-import kakao from "../../src_assets/kakao.svg"
-import { useNavigate } from "react-router-dom";
-import { __login } from "../../redux/modules/loginSlice";
-import { __checkUsername } from "../../redux/modules/signupSlice";
-import { useDispatch, useSelector } from "react-redux";
+import kakao from "../../src_assets/kakao.svg";
+import {useNavigate} from "react-router-dom";
+import {__login} from "../../redux/modules/loginSlice";
+import {__checkUsername} from "../../redux/modules/signupSlice";
+import {useDispatch, useSelector} from "react-redux";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 
@@ -13,11 +13,11 @@ const LoginForm = () => {
   console.log(checkUserName)
   // const sessionToken = sessionStorage.getItem("token");
   // const payload = sessionStorage.getItem("token") !== null? jwt_decode(sessionStorage.getItem("token")): 1;
-  
   // const payload = jwt_decode(sessionToken);
   // console.log(sessionToken)
   // console.log(payload)
   // const payload = jwt_decode(sessionToken);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [switches, setSwitches] = useState(false);
@@ -30,10 +30,10 @@ const LoginForm = () => {
 
 
   const changeInput = (e) => {
-    const { value, id } = e.target;
-    setLoginData({ ...loginData, [id]: value });
+    const {value, id} = e.target;
+    setLoginData({...loginData, [id]: value});
   };
-  
+
   const submitLogin = async (e) => {
     e.preventDefault();
     const loginState = await dispatch(__login(loginData));
@@ -50,21 +50,19 @@ const LoginForm = () => {
   useEffect(() => {
     if (loginData.email !== "" && loginData.password !== "") {
       setFormData(true);
-    } 
-    else {
+    } else {
       setFormData(false);
     }
   }, [loginData]);
 
-
   const onToggleHandler = () => {
-    setSwitches(!switches)
-  }
+    setSwitches(!switches);
+  };
 
   // const onToggleHandler_pw = () => {
   //   setSwitches_pw(!switches_pw)
   // }
-  
+
   return (
     <StLoginContainer onSubmit={submitLogin}>
       <a href="http://wetube-phenomenonlee.shop/api/users/auth/kakao"> 
@@ -89,29 +87,44 @@ const LoginForm = () => {
         />
       {switches_pw?(
         <>
-        <label>비밀번호</label> 
-        <input 
-          id="password"
-          type="password" 
-          placeholder="4자 이상, 숫자와 영문자 조합" 
-          required
-          onChange={changeInput}
+          <label>이메일</label>
+          <input
+            id="email"
+            type="email"
+            placeholder="이메일을 입력해주세요"
+            required
+            onChange={changeInput}
           />
+          {switches_pw ? (
+            <>
+              <label>비밀번호</label>
+              <input
+                id="password"
+                type="password"
+                placeholder="4자 이상, 숫자와 영문자 조합"
+                required
+                onChange={changeInput}
+              />
+            </>
+          ) : (
+            ""
+          )}
+
+          <button type="submit">다음</button>
+          {/* <button onClick={onToggleHandler_pw}>ㅋㅋ</button> */}
+          <p
+            className="remember_p"
+            onClick={() => {
+              navigate("/signup");
+            }}
+          >
+            이메일이 기억나지 않아요
+          </p>
         </>
-      ): ""}
-      
-      <button
-        type="submit"
-      >
-        다음</button>
-      {/* <button onClick={onToggleHandler_pw}>ㅋㅋ</button> */}
-      <p className="remember_p" onClick={()=>{
-        navigate("/signup");
-      }}>이메일이 기억나지 않아요</p> 
-    </>) : null}
-  </StLoginContainer>
+      ) : null}
+    </StLoginContainer>
   );
-}
+};
 
 const StLoginContainer = styled.form`
   display: flex;
@@ -129,7 +142,7 @@ const StLoginContainer = styled.form`
     background-color: #e8344e;
 
     & > .kakaoImg {
-      transform: translate(-2px, 5px)
+      transform: translate(-2px, 5px);
     }
   }
 
@@ -150,7 +163,7 @@ const StLoginContainer = styled.form`
 
   & > .remember_p {
     margin-bottom: 30px;
-    cursor:pointer;
+    cursor: pointer;
   }
 
   & > input {

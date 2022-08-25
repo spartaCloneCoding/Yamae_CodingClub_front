@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, {useEffect} from "react";
 import styled from "styled-components";
 import { ReactComponent as Logo } from "../../src/logo.svg";
 import { useNavigate } from "react-router-dom";
@@ -7,9 +7,9 @@ import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logOutUser } from "../redux/modules/loginSlice";
 
+
 const Header = () => {
   const checktoken = useSelector((state) => state);
-  console.log(checktoken)
   const sessionToken = sessionStorage.getItem("token");
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -26,7 +26,6 @@ const Header = () => {
     dispatch(logOutUser());
     navigate("/");
   };
-
 
 
   return (

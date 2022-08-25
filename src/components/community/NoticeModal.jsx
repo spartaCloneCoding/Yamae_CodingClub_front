@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+
 const NoticeModal = () => {
   const [show, setShow] = React.useState(false);
 
@@ -13,7 +14,6 @@ const NoticeModal = () => {
         >
           자유게시판 공지
         </text>
-
         {show === true ? (
           <>
             <ModalBox>
