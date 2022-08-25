@@ -5,7 +5,7 @@ export const __signup = createAsyncThunk(
   "signup/SIGNUP_LOG",
   async (payload) => {
     const response = await api.post("api/users/join", payload);
-    // console.log(payload)
+    console.log(response)
     alert("회원가입이 완료되었습니다.");
     return response.data.result;
   }

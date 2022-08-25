@@ -6,12 +6,18 @@ import {__login} from "../../redux/modules/loginSlice";
 import {__checkUsername} from "../../redux/modules/signupSlice";
 import {useDispatch, useSelector} from "react-redux";
 import axios from "axios";
-// import jwt_decode from "jwt-decode";
+import jwt_decode from "jwt-decode";
 
 const LoginForm = () => {
-  const checkUserName = useSelector((state) => state);
-  const token = window.localStorage.getItem("token");
-  // const payload = jwt_decode(token);
+  const checkUserName = useSelector((state) => state.login.user);
+  console.log(checkUserName)
+  // const sessionToken = sessionStorage.getItem("token");
+  // const payload = sessionStorage.getItem("token") !== null? jwt_decode(sessionStorage.getItem("token")): 1;
+  // const payload = jwt_decode(sessionToken);
+  // console.log(sessionToken)
+  // console.log(payload)
+  // const payload = jwt_decode(sessionToken);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [switches, setSwitches] = useState(false);
@@ -22,6 +28,7 @@ const LoginForm = () => {
     password: "",
   });
 
+
   const changeInput = (e) => {
     const {value, id} = e.target;
     setLoginData({...loginData, [id]: value});
@@ -30,12 +37,13 @@ const LoginForm = () => {
   const submitLogin = async (e) => {
     e.preventDefault();
     const loginState = await dispatch(__login(loginData));
+    const payload = sessionStorage.getItem("token") !== null? jwt_decode(sessionStorage.getItem("token")): 1;
+    if (loginState.type === "log/LOGIN_LOG/fulfilled") {
+        alert(`${payload.userNickname} 님 환영합니다.`);        
+      navigate("/");
+    }
     if (loginState.type === "log/LOGIN_LOG/rejected") {
       alert("아이디 혹은 비밀번호가 틀렸습니다.");
-    }
-    if (loginState.type === "log/LOGIN_LOG/fulfilled") {
-      // alert(`${payload.userNickname} 님 환영합니다.`);
-      navigate("/");
     }
   };
 
@@ -57,18 +65,27 @@ const LoginForm = () => {
 
   return (
     <StLoginContainer onSubmit={submitLogin}>
-      <button className="kakao">
-        <img className="kakaoImg" src={kakao} alt="이미지를 불러 올 수 없" />
-        &nbsp;카카오로 1초만에 시작 안됨
-      </button>
-      <p className="btn" onClick={onToggleHandler}>
-        이메일로 시작하기
-      </p>
-      <a href="http://wetube-phenomenonlee.shop/api/users/auth/kakao">
-        {" "}
-        일단 카카오 로그인
+      <a href="http://wetube-phenomenonlee.shop/api/users/auth/kakao"> 
+        <button className="kakao">
+          <img className="kakaoImg" src = {kakao} alt="이미지를 불러 올 수 없"/>
+          &nbsp;카카오로 1초만에 시작하기
+        </button> 
       </a>
-      {switches ? (
+      <a href="http://wetube-phenomenonlee.shop/api/users/auth/kakao"> 
+      일단 카카오 로그인
+      </a>
+    <p className="btn" onClick={onToggleHandler}>이메일로 시작하기</p> 
+    {switches? (    
+    <>
+      <label>이메일</label> 
+      <input 
+        id="email"
+        type="email" 
+        placeholder="이메일을 입력해주세요" 
+        required
+        onChange={changeInput}
+        />
+      {switches_pw?(
         <>
           <label>이메일</label>
           <input
@@ -113,7 +130,7 @@ const StLoginContainer = styled.form`
   display: flex;
   flex-flow: column;
 
-  & > button {
+  button {
     width: 100%;
     padding: 18px 30px;
     border: none;
@@ -129,7 +146,7 @@ const StLoginContainer = styled.form`
     }
   }
 
-  & > .kakao {
+ .kakao {
     background-color: #ffe500;
     color: black;
   }

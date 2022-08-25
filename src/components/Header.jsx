@@ -1,11 +1,12 @@
 import React, {useEffect} from "react";
 import styled from "styled-components";
-import {ReactComponent as Logo} from "../../src/logo.svg";
-import {useNavigate} from "react-router-dom";
-import {useState} from "react";
-import {useLocation} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import {logOutUser, __checkToken} from "../redux/modules/loginSlice";
+import { ReactComponent as Logo } from "../../src/logo.svg";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logOutUser } from "../redux/modules/loginSlice";
+
 
 const Header = () => {
   const checktoken = useSelector((state) => state);
@@ -26,11 +27,6 @@ const Header = () => {
     navigate("/");
   };
 
-  React.useEffect(() => {
-    if (sessionToken) {
-      dispatch(__checkToken());
-    }
-  }, [sessionToken]);
 
   return (
     <StHeader headerStyle={pathName === "/" ? "sticky" : "static"}>
@@ -65,13 +61,22 @@ const Header = () => {
           </StListContainer>
         </div>
         <StRightContainer>
-          <StBtn
-            onClick={() => {
-              navigate("/login");
-            }}
-          >
-            로그인
-          </StBtn>
+          {sessionToken?           
+            <StBtn onClick={() => {
+              logOut()            
+              }}>
+              로그아웃
+            </StBtn>
+            :
+            <StBtn
+              onClick={() => {
+                navigate("/login");
+              }}
+            >
+              로그인
+            </StBtn>
+            }
+
         </StRightContainer>
       </StHeaderContainer>
     </StHeader>
@@ -135,7 +140,7 @@ const StListContainer = styled.ul`
 const StRightContainer = styled.div``;
 
 const StBtn = styled.button`
-  width: 78.4px;
+  width: 100px;
   height: 49px;
   background-color: rgb(232, 52, 78);
   color: white;
