@@ -9,8 +9,8 @@
 
 |팀원|역할분담|
 |------|------|
-|최락현|로그인, 회원가입, 소셜로그인 기능구현 |
-|김영건|Comment CRUD, Commnity CR, DetailPage D, 서버배포 |
+|최락현|LoginPage, SignupPage, SocialLogin |
+|김영건|Comment CRUD, CommnityPage CR, DetailPage D, 서버배포 |
 
 
 ## 트러블슈팅
