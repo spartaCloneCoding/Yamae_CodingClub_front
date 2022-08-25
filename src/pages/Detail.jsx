@@ -12,19 +12,18 @@ import {useNavigate} from "react-router-dom";
 const Detail = () => {
   const navigate = useNavigate();
   const [commentList, setCommentList] = React.useState([]);
-  // const navigate = Navigate();
+  const [nick, setNick] = React.useState(""); // const navigate = Navigate();
   const [contents, setContents] = React.useState("");
   const {postId} = useParams();
 
   // DetailPagte Get
   const Get_Detail = async () => {
     const res = await api.get(`api/posts/${postId}`);
-    console.log(res.data);
     setContents(res.data.result);
+    setNick(res.data.result.User);
   };
 
   // Del_Post
-
   const Del_Post = (postId) => {
     api.delete(`api/posts/${postId}`).then(() => {
       window.location.reload();
@@ -48,21 +47,31 @@ const Detail = () => {
     <>
       <Container>
         <Section>
+          <h1>{nick.nickname}님의 글</h1>
           <ContentBox>
-            {contents.content}
+            <h1>{contents.title}</h1>
             <Nick>{contents.nickname}</Nick>
             <CtreatAt>{contents.createdAt}</CtreatAt>
             <title>{contents.title}</title>
             <LikeCommentBox>
               <h4>💬 {contents.cmtNum} </h4>
-              <h4>
-                <Like />
-                {contents.likeNum}
-              </h4>
+
+              <LikeBox>
+                <div>
+                  <Like />
+                </div>
+                <h4>{contents.likeNum}</h4>
+              </LikeBox>
             </LikeCommentBox>
             <Content>{contents.content}</Content>
-            <MiddleStyle>
-              <p>💬 댓글</p>
+            <ButtonGroup>
+              <button
+                onClick={() => {
+                  navigate("/community");
+                }}
+              >
+                목록으로
+              </button>
               <button
                 onClick={() => {
                   Del_Post(postId);
@@ -71,33 +80,16 @@ const Detail = () => {
               >
                 게시물 삭제
               </button>
+            </ButtonGroup>
+            <MiddleStyle>
+              <p>💬 댓글</p>
             </MiddleStyle>
             {commentList?.map((comments) => {
               return <Comment key={comments.commentId} comments={comments} />;
             })}
+
             <AddComment />
           </ContentBox>
-          <ButtonGroup>
-            <div>
-              <button
-                onClick={() => {
-                  navigate("/community");
-                }}
-              >
-                목록으로
-              </button>
-            </div>
-            <NextGroup>
-              <button
-                onClick={() => {
-                  navigate(`/detail/${postId}`);
-                }}
-              >
-                ⬅️
-              </button>
-              <button>➡️</button>
-            </NextGroup>
-          </ButtonGroup>
         </Section>
         {/* <BottomBox /> */}
       </Container>
@@ -118,11 +110,23 @@ const Section = styled.div`
   background-color: #f4f5f6;
   padding: 50px;
 `;
+
+const LikeBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  div {
+    padding-top: 2.5px;
+    padding-left: 5px;
+  }
+  h4 {
+    padding-right: 100px;
+  }
+`;
 const ContentBox = styled.div`
   margin: auto;
   max-width: 957px;
   width: 100%;
-  padding: 32px 20px;
+  padding: 50px 20px;
   background-color: #fff;
   border-radius: 5px;
 `;
@@ -132,11 +136,13 @@ const Content = styled.div`
   border-top: 1px solid #eaebed;
   height: 100px;
   border-radius: 2px;
+  margin-top: 10px;
 `;
 
 const MiddleStyle = styled.div`
   display: flex;
   justify-content: space-between;
+  border-top: 0.4px solid #eaebed;
 
   button {
     background-color: transparent;
@@ -155,6 +161,8 @@ const LikeCommentBox = styled.div`
   display: flex;
   flex-direction: row;
   height: 70px;
+  padding: 10px;
+
   p {
     margin: 10px;
   }
@@ -164,44 +172,35 @@ const LikeCommentBox = styled.div`
     opacity: 0.95;
   }
 `;
-const NextGroup = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin-top: 5px;
-  button {
-    margin-left: 5px;
-  }
-`;
+
 const ButtonGroup = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: right;
   align-items: center;
-  width: 800px;
+  opacity: 0.8;
   margin-top: 10px;
-  margin-right: 10px;
-  opacity: 0.9;
 
   button {
-    width: 100%;
-    display: -webkit-box;
+    /* width: 100%; */
+    /* display: -webkit-box;
     display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
+    display: -ms-flexbox; */
+    /* display: flex; */
+    /* -webkit-box-pack: center; */
+    /* -ms-flex-pack: center; */
     -webkit-justify-content: center;
     justify-content: center;
-    background-color: #1c1d1e;
-    border-radius: 8px;
+    background-color: transparent;
+
     border: transparent;
-    padding: 14px;
+    /* padding: 14px;
     font-family: Pretendard;
-    font-size: 14px;
+    font-size: 14px;*/
     cursor: pointer;
-    font-weight: 700;
-    color: white;
+    font-weight: 500;
     gap: 8px;
+    /* margin-left: 200px; */
   }
 `;
 

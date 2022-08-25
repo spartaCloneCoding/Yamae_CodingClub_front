@@ -7,11 +7,8 @@ const Like = () => {
   const {postId} = useParams();
   const [likeOn, setLikeOn] = React.useState(false);
   // const [likeNum, setLikeNum] = React.useState("");
-  console.log("함수밖");
 
-  console.log(likeOn);
   const Like_On_Click = () => {
-    console.log("함수안쪽", likeOn);
     if (!likeOn) {
       api.post(`api/posts/${postId}`, true);
       setLikeOn(!likeOn);

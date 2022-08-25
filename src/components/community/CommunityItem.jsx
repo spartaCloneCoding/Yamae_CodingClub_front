@@ -2,9 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import {useNavigate} from "react-router-dom";
 import {api} from "../../shared/api";
+import {useParams} from "react-router-dom";
 const CommunityItem = () => {
   const navigate = useNavigate();
-  const [banJack, setBanJak] = React.useState(false);
+  const {postId} = useParams();
+  const [contents, setContents] = React.useState("");
 
   const [community, setCommunity] = React.useState([
     {
@@ -16,21 +18,24 @@ const CommunityItem = () => {
   // __GET_POSTS
   const Get_Posts = async () => {
     const res = await api.get("api/posts");
-    console.log(res);
     setCommunity(res.data.result);
-    setBanJak(!banJack);
+    console.log(res.data.result);
+  };
+
+  const Get_Detail = async () => {
+    const res = await api.get(`api/posts/${postId}`);
+    setContents(res.data.result);
   };
 
   React.useEffect(() => {
     Get_Posts();
+    Get_Detail();
   }, []);
-  // Get_Posts();
   return (
     <div>
-      {community.createData}
       {community?.map((post) => (
         <ContentBox key={post.id}>
-          <Nick>{post.nickname}</Nick>
+          <Nick>{contents.nickname}</Nick>
           <h6>{post.createdAt}</h6>
           <BodyText
             onClick={() => {

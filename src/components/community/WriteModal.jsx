@@ -7,10 +7,12 @@ const Modal = () => {
     title: "",
     content: "",
   });
+  console.log(22, posts);
 
   //__POST_POST
   const onSubmitHandler = (posts) => {
     api.post("api/posts", posts).then(() => {
+      console.log(posts);
       window.location.reload();
     });
   };

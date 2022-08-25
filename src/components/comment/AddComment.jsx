@@ -8,7 +8,6 @@ const AddComment = () => {
   const [addComment, setAddComment] = React.useState("");
 
   // 댓글 추가
-  console.log(postId);
   const onSubmitHandler = (comments) => {
     api.post(`api/comments/${postId}`, comments).then(() => {
       if (addComment.comments.trim() === "") {

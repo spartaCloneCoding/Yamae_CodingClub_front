@@ -1,17 +1,12 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-import { api } from "../../shared/api";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {api} from "../../shared/api";
 
-export const __login = createAsyncThunk(
-  "log/LOGIN_LOG",
-  async (payload) => {
-    const response = await api.post("api/users/login", payload);
-    console.log(response)
-    sessionStorage.setItem("token", response.data.message);
-    return response.data;
-  }
-);
+export const __login = createAsyncThunk("log/LOGIN_LOG", async (payload) => {
+  const response = await api.post("api/users/login", payload);
 
+  sessionStorage.setItem("token", response.data.message);
+  return response.data;
+});
 
 export const __checkToken = createAsyncThunk(
   "__checkToken/CHECK_LOG",
@@ -24,13 +19,13 @@ export const __checkToken = createAsyncThunk(
 const loginSlice = createSlice({
   name: "login",
   initialState: {
-    user: { nickName: "", result: false },
+    user: {nickName: "", result: false},
     loading: false,
     error: null,
   },
   reducers: {
     logOutUser: (state, payload) => {
-      state.user = { nickName: "", result: false };
+      state.user = {nickName: "", result: false};
     },
   },
   //
@@ -38,7 +33,6 @@ const loginSlice = createSlice({
     builder
 
       .addCase(__login.fulfilled, (state, action) => {
-        // console.log(action.payload)
         state.loading = false;
         state.user = {
           nickName: action.payload.nickname,
@@ -64,5 +58,5 @@ const loginSlice = createSlice({
   },
 });
 
-export const { logOutUser } = loginSlice.actions;
+export const {logOutUser} = loginSlice.actions;
 export default loginSlice.reducer;
