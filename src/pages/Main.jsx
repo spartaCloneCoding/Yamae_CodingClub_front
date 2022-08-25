@@ -3,8 +3,9 @@ import styled from "styled-components";
 import MainDetail from "../components/main/MainDetail";
 
 const Main = () => {
-  if (window.location.href.slice(-167)) {
-    sessionStorage.setItem("token", window.location.href.slice(-167));
+  if (window.location.href) {
+    const [url, token] = window.location.href.split("=");
+    sessionStorage.setItem("token", token);
   }
   return (
     <Stheight>

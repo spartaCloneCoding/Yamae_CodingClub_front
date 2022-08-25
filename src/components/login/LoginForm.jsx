@@ -85,16 +85,6 @@ const LoginForm = () => {
         required
         onChange={changeInput}
         />
-      {switches_pw?(
-        <>
-          <label>이메일</label>
-          <input
-            id="email"
-            type="email"
-            placeholder="이메일을 입력해주세요"
-            required
-            onChange={changeInput}
-          />
           {switches_pw ? (
             <>
               <label>비밀번호</label>
