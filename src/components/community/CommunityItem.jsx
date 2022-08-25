@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import {useNavigate} from "react-router-dom";
-import axios from "axios";
-
+import {api} from "../../shared/api";
 const CommunityItem = () => {
   const navigate = useNavigate();
   const [community, setCommunity] = React.useState([
@@ -11,17 +10,18 @@ const CommunityItem = () => {
       content: "",
     },
   ]);
-// __GET_POSTS
+
+  // __GET_POSTS
   const Get_Posts = async () => {
-    // const res = await axios.get("http://wetube-phenomenonlee.shop/api/posts");
-    const res = await axios.get("http://54.180.113.36/api/posts");
-    setCommunity(res.data.result); 
+    const res = await api.get("api/posts");
+    console.log(res);
+    setCommunity(res.data.result);
   };
 
   React.useEffect(() => {
     Get_Posts();
   }, []);
-
+  // Get_Posts();
   return (
     <div>
       {community.createData}
@@ -79,8 +79,7 @@ const LikeBox = styled.div`
   }
 `;
 const BodyText = styled.div`
-cursor: pointer;
-
+  cursor: pointer;
 `;
 const CtreatAt = styled.div``;
 export default CommunityItem;

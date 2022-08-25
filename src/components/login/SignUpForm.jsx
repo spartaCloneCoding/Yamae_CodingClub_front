@@ -1,8 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux"
-import { __signup, __checkNickname, __checkUsername, changeCheckName, changeCheckNick } from "../../redux/modules/signupSlice";
+import {useNavigate} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {
+  __signup,
+  __checkNickname,
+  __checkUsername,
+  changeCheckName,
+  changeCheckNick,
+} from "../../redux/modules/signupSlice";
 
 const SignUpForm = () => {
   const checkUserName = useSelector((state) => state.signup);
@@ -17,15 +23,13 @@ const SignUpForm = () => {
     confirmPw: "",
     nickname: "",
   });
-  console.log(checkUserName)
-
 
   const email = checkUserName;
   const nick = checkNickName;
 
   const changeInput = (e) => {
-    const { value, id } = e.target;
-    setSignData({ ...signData, [id]: value });
+    const {value, id} = e.target;
+    setSignData({...signData, [id]: value});
     if (id === "email") dispatch(changeCheckName());
     if (id === "nickname") dispatch(changeCheckNick());
   };
@@ -41,11 +45,11 @@ const SignUpForm = () => {
 
   const CheckId = () => {
     if (
-      signData.email.indexOf(".") !== -1 && signData.email.indexOf("@") !== -1) {
-        
+      signData.email.indexOf(".") !== -1 &&
+      signData.email.indexOf("@") !== -1
+    ) {
       dispatch(__checkUsername(signData.email));
-    } 
-    else {
+    } else {
       alert("이메일 형식으로 작성해주세요");
     }
   };
@@ -56,10 +60,11 @@ const SignUpForm = () => {
 
   useEffect(() => {
     if (
-      signData.passwordCheck === signData.password && signData.password !== "") {
+      signData.passwordCheck === signData.password &&
+      signData.password !== ""
+    ) {
       setConfirmPassword(true);
-    } 
-    else {
+    } else {
       setConfirmPassword(false);
     }
   }, [signData]);
@@ -67,55 +72,54 @@ const SignUpForm = () => {
   useEffect(() => {
     if (email && nick && confirmPassword) {
       setFormData(true);
-    } 
-    else {
+    } else {
       setFormData(false);
     }
   }, [email, nick, confirmPassword]);
 
-
   return (
     <StLoginContainer onSubmit={submitLogin}>
       <label>이메일</label>
-      <input 
+      <input
         id="email"
         type="email"
-        placeholder="이메일을 입력해주세요." 
+        placeholder="이메일을 입력해주세요."
         required
         onChange={changeInput}
-        />
-      <button className="checkbtn" onClick={(CheckId)}>중복확인</button>
+      />
+      <button className="checkbtn" onClick={CheckId}>
+        중복확인
+      </button>
       <label>비밀번호</label>
-      <input 
-          id="password"
-          type="password" 
-          placeholder="4자 이상, 숫자와 영문자 조합" 
-          required
-          onChange={changeInput}
-        />
+      <input
+        id="password"
+        type="password"
+        placeholder="4자 이상, 숫자와 영문자 조합"
+        required
+        onChange={changeInput}
+      />
       <label>비밀번호 확인</label>
-      <input 
-          id="confirmPw"
-          type="password" 
-          placeholder="4자 이상, 숫자와 영문자 조합" 
-          required
-          onChange={changeInput}
-        />
+      <input
+        id="confirmPw"
+        type="password"
+        placeholder="4자 이상, 숫자와 영문자 조합"
+        required
+        onChange={changeInput}
+      />
       <label>닉네임</label>
-      <input 
-          id="nickname"
-          placeholder="4자 이상, 숫자와 영문자 조합" 
-          required
-          onChange={changeInput}
-        />
-      <button className="checkbtn" onClick={(CheckNick)}>중복확인</button>
-      <button
-        type="submit"
-      >
-        가입하기</button>
+      <input
+        id="nickname"
+        placeholder="4자 이상, 숫자와 영문자 조합"
+        required
+        onChange={changeInput}
+      />
+      <button className="checkbtn" onClick={CheckNick}>
+        중복확인
+      </button>
+      <button type="submit">가입하기</button>
     </StLoginContainer>
   );
-}
+};
 
 const StLoginContainer = styled.form`
   display: flex;
