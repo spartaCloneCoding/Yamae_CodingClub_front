@@ -1,12 +1,17 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {api} from "../../shared/api";
 
-export const __login = createAsyncThunk("log/LOGIN_LOG", async (payload) => {
-  const response = await api.post("api/users/login", payload);
 
-  sessionStorage.setItem("token", response.data.message);
-  return response.data;
-});
+export const __login = createAsyncThunk(
+  "log/LOGIN_LOG",
+  async (payload) => {
+    const response = await api.post("api/users/login", payload);
+    console.log(response.data.message)
+    sessionStorage.setItem("token", response.data.message);
+    return response.data;
+  }
+);
+
 
 export const __checkToken = createAsyncThunk(
   "__checkToken/CHECK_LOG",
