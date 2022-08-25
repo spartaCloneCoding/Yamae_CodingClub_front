@@ -108,7 +108,7 @@ const SignUpForm = () => {
           required
           onChange={changeInput}
         />
-      <button className="checkbtn" onClick={(CheckNick)}>중복확인</button>
+      {/* <button className="checkbtn" onClick={(CheckNick)}>중복확인</button> */}
       <button
         type="submit"
       >
