@@ -5,40 +5,42 @@ import {useParams} from "react-router-dom";
 import {api} from "../../shared/api";
 // import userEvent from "@testing-library/user-event";
 const Comment = ({comments}) => {
-  const {id} = useParams();
+  const {postId} = useParams();
   // const {commentId} = useParams();
-  const [comment, setComment] = React.useState([]);
+  // const [comment, setComment] = React.useState([]);
   // 수정
   const [editInput, setEditInput] = React.useState(false);
   const [editComment, setEditComment] = React.useState({
     comment: "",
   });
 
-  // GET_COMMENT;
-  // const GET_COMMENT = async () => {
-  //   const res = await api.get(`api/comments/${id}`);
-  //   setComment(res.data);
-  // };
-
   // DELELTE_COMMENT
+  const commentId = comments.id;
+  console.log(commentId);
   const Del_COMMENT = (commentId) => {
-    api.delete(`api/comments/${commentId}`);
+    api.delete(`api/comments/${commentId}`).then(() => {
+      window.location.reload();
+    });
   };
 
   // PATCH_COMMENT
   const EDIT_COMMENT = (commentId, editComment) => {
-    api.patch(`api/comments/${commentId}`, editComment);
+    // console.log(commentId, commentId);
+    api.patch(`api/comments/${commentId}`, editComment).then(() => {
+      window.location.reload();
+    });
   };
+
   return (
     <>
       <Container>
         <>
           {editInput !== true ? (
             <ContentBox>
-              <div>
-                <CreatAt>{comments.createdAt}</CreatAt>
+              <NickNameGroup>
                 <NickName>{comments.User.nickname}</NickName>
-              </div>
+                <CreatAt>{comments.createdAt}</CreatAt>
+              </NickNameGroup>
               <p>{comments.comment}</p>
               {/* {comment.cmtNum} */}
               <ButtonGroup>
@@ -48,7 +50,7 @@ const Comment = ({comments}) => {
                     setEditInput(!editInput);
                   }}
                 >
-                  ✍🏼
+                  수정
                 </button>
                 <button
                   type="button"
@@ -56,7 +58,7 @@ const Comment = ({comments}) => {
                     Del_COMMENT(comments.id);
                   }}
                 >
-                  ❌
+                  삭제
                 </button>
               </ButtonGroup>
             </ContentBox>
@@ -72,17 +74,17 @@ const Comment = ({comments}) => {
                       comment: value,
                     });
                   }}
-                  placeholder={comment.comment}
+                  placeholder={comments.comment}
                 />
-                <button
+                <ComButton
                   type="button"
                   onClick={() => {
-                    EDIT_COMMENT(editComment);
+                    EDIT_COMMENT(commentId);
                     setEditInput(!editInput);
                   }}
                 >
                   완료
-                </button>
+                </ComButton>
               </div>
             </>
           )}
@@ -103,12 +105,17 @@ const Container = styled.div`
     border: 1px solid lightgray;
     border-radius: 10px;
     opacity: 0.2px;
-    width: 890px;
-    height: 50px;
+    width: 720px;
+    height: 40px;
     margin-top: 20px;
   }
 `;
-
+const NickNameGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
 const ContentBox = styled.div`
   display: flex;
   background-color: #f4f5f6;
@@ -126,13 +133,22 @@ const ButtonGroup = styled.div`
   button {
     cursor: pointer;
     border: transparent;
+    background-color: transparent;
   }
 `;
 const NickName = styled.div``;
 const CreatAt = styled.small`
-  font-size: 10px;
+  font-size: 7px;
 `;
 
+const ComButton = styled.button`
+  height: 45px;
+  width: 50px;
+  cursor: pointer;
+  border: 0.5px solid lightgray;
+  border-radius: 10px;
+  background-color: transparent;
+`;
 // console.log(commentId);
 
 // React.useEffect(() => {
@@ -140,3 +156,15 @@ const CreatAt = styled.small`
 // }, []);
 
 // 데이터를 웹으로 출력중에 에러 Uncaught TypeError: comment.map is not a function 배열확인.
+
+// // GET_COMMENT;
+// const GET_COMMENT = async () => {
+//   const res = await api.get(`api/comments/${postId}`);
+//   console.log(comments);
+//   console.log(res.data);
+//   setComment(res.data);
+// };
+
+// React.useEffect(() => {
+//   GET_COMMENT();
+// }, []);

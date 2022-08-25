@@ -6,24 +6,34 @@ import Like from "../components/Like";
 import {useParams} from "react-router-dom";
 import {api} from "../shared/api";
 import AddComment from "../components/comment/AddComment";
+import {useNavigate} from "react-router-dom";
 // import {Navigate} from "react-router-dom";
 
 const Detail = () => {
+  const navigate = useNavigate();
   const [commentList, setCommentList] = React.useState([]);
   // const navigate = Navigate();
   const [contents, setContents] = React.useState("");
-  const {id} = useParams();
+  const {postId} = useParams();
 
   // DetailPagte Get
   const Get_Detail = async () => {
-    const res = await api.get(`api/posts/${id}`);
+    const res = await api.get(`api/posts/${postId}`);
     console.log(res.data);
     setContents(res.data.result);
   };
 
+  // Del_Post
+
+  const Del_Post = (postId) => {
+    api.delete(`api/posts/${postId}`).then(() => {
+      window.location.reload();
+    });
+  };
+
   // Commment_Get
   const GET_COMMENT = async () => {
-    const res = await api.get(`api/comments/${id}`);
+    const res = await api.get(`api/comments/${postId}`);
     setCommentList(res.data);
   };
 
@@ -31,6 +41,9 @@ const Detail = () => {
     GET_COMMENT();
     Get_Detail();
   }, []);
+
+  // GET_COMMENT();
+
   return (
     <>
       <Container>
@@ -41,31 +54,47 @@ const Detail = () => {
             <CtreatAt>{contents.createdAt}</CtreatAt>
             <title>{contents.title}</title>
             <LikeCommentBox>
-              <h4>💬 0 </h4>
+              <h4>💬 {contents.cmtNum} </h4>
               <h4>
                 <Like />
-                {contents.like}{" "}
+                {contents.likeNum}
               </h4>
             </LikeCommentBox>
             <Content>{contents.content}</Content>
-            💬 댓글
+            <MiddleStyle>
+              <p>💬 댓글</p>
+              <button
+                onClick={() => {
+                  Del_Post(postId);
+                  navigate("/community");
+                }}
+              >
+                게시물 삭제
+              </button>
+            </MiddleStyle>
             {commentList?.map((comments) => {
               return <Comment key={comments.commentId} comments={comments} />;
             })}
+            <AddComment />
           </ContentBox>
-          <AddComment />
           <ButtonGroup>
             <div>
               <button
-              // onClick={() => {
-              //   // navigate("/community");
-              // }}
+                onClick={() => {
+                  navigate("/community");
+                }}
               >
                 목록으로
               </button>
             </div>
             <NextGroup>
-              <button>⬅️</button>
+              <button
+                onClick={() => {
+                  navigate(`/detail/${postId}`);
+                }}
+              >
+                ⬅️
+              </button>
               <button>➡️</button>
             </NextGroup>
           </ButtonGroup>
@@ -103,6 +132,16 @@ const Content = styled.div`
   border-top: 1px solid #eaebed;
   height: 100px;
   border-radius: 2px;
+`;
+
+const MiddleStyle = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  button {
+    background-color: transparent;
+    border-color: transparent;
+  }
 `;
 const Nick = styled.div`
   font-size: 14px;

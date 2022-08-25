@@ -4,6 +4,8 @@ import {useNavigate} from "react-router-dom";
 import {api} from "../../shared/api";
 const CommunityItem = () => {
   const navigate = useNavigate();
+  const [banJack, setBanJak] = React.useState(false);
+
   const [community, setCommunity] = React.useState([
     {
       title: "",
@@ -16,6 +18,7 @@ const CommunityItem = () => {
     const res = await api.get("api/posts");
     console.log(res);
     setCommunity(res.data.result);
+    setBanJak(!banJack);
   };
 
   React.useEffect(() => {

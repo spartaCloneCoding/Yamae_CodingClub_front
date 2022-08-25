@@ -10,8 +10,9 @@ const Modal = () => {
 
   //__POST_POST
   const onSubmitHandler = (posts) => {
-    api.post("api/posts", posts);
-    sessionStorage.getItem("token");
+    api.post("api/posts", posts).then(() => {
+      window.location.reload();
+    });
   };
 
   const onClickHandler = (e) => {

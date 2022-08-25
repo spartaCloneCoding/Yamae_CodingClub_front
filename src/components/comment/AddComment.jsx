@@ -1,25 +1,27 @@
-import React from "react";
+import React, {useEffect} from "react";
 import axios from "axios";
 import styled from "styled-components";
 import {useParams} from "react-router-dom";
 import {api} from "../../shared/api";
 const AddComment = () => {
-  const {id} = useParams();
+  const {postId} = useParams();
   const [addComment, setAddComment] = React.useState("");
 
   // 댓글 추가
+  console.log(postId);
   const onSubmitHandler = (comments) => {
-    api.post(`api/comments/${id}`, comments).then(() => {});
+    api.post(`api/comments/${postId}`, comments).then(() => {
+      if (addComment.comments.trim() === "") {
+        return alert("댓글을 입력해주세요.");
+      }
+      window.location.reload();
+    });
   };
-  // onRset();
+
   return (
     <>
       <FormInput
-        onSubmit={(e) => {
-          e.preventDefault();
-          if (addComment.comment.trim() === "") {
-            return alert("댓글을 입력해주세요.");
-          }
+        onSubmit={() => {
           onSubmitHandler(addComment);
         }}
       >
@@ -49,6 +51,8 @@ const AddComment = () => {
 const FormInput = styled.form`
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
 `;
 const InputGroup = styled.div`
   display: flex;
@@ -59,15 +63,21 @@ const InputGroup = styled.div`
   height: 55px;
   width: 945px;
   input {
-    border-right: 0px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    opacity: 0.2px;
+    width: 720px;
+    height: 40px;
+    margin-top: 20px;
   }
   button {
     height: 50px;
     width: 70px;
-    border-radius: 5px;
+    border-radius: 20px;
     border-left: 0px;
-    border: 0.5px solid lightgray;
+    border: transparent;
     margin-top: 20px;
+    background-color: transparent;
     cursor: pointer;
   }
 `;
