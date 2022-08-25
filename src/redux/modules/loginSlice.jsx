@@ -6,7 +6,7 @@ export const __login = createAsyncThunk(
   "log/LOGIN_LOG",
   async (payload) => {
     const response = await api.post("api/users/login", payload);
-    console.log(response)
+    console.log(response.data.message)
     sessionStorage.setItem("token", response.data.message);
     return response.data;
   }

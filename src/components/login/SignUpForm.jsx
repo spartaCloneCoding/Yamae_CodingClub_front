@@ -23,6 +23,9 @@ const SignUpForm = () => {
     confirmPw: "",
     nickname: "",
   });
+  // const [emailData, setEmailData] = useState({
+  //   email: "",
+  // });
 
   const email = checkUserName;
   const nick = checkNickName;
@@ -37,20 +40,22 @@ const SignUpForm = () => {
   const submitLogin = async (e) => {
     e.preventDefault();
     const checkState = await dispatch(__signup(signData));
-
+    console.log(checkState)
     if (checkState.payload) {
       navigate("/login");
     }
   };
 
-  const CheckId = () => {
+  const CheckId = (e) => {
+    e.preventDefault();
     if (
       signData.email.indexOf(".") !== -1 &&
       signData.email.indexOf("@") !== -1
     ) {
-      dispatch(__checkUsername(signData.email));
+      dispatch(__checkUsername({email:signData.email}));
+      // dispatch(__checkUsername(signData.email));
     } else {
-      alert("이메일 형식으로 작성해주세요");
+      alert("이메일 형식으로 작성해주세요.");
     }
   };
 
@@ -87,7 +92,7 @@ const SignUpForm = () => {
         required
         onChange={changeInput}
       />
-      <button className="checkbtn" onClick={CheckId}>
+      <button className="checkbtn" type="submit" onClick={CheckId}>
         중복확인
       </button>
       <label>비밀번호</label>
@@ -96,6 +101,7 @@ const SignUpForm = () => {
         type="password"
         placeholder="4자 이상, 숫자와 영문자 조합"
         required
+        pattern="^[a-zA-Z0-9]{4,16}$"
         onChange={changeInput}
       />
       <label>비밀번호 확인</label>
@@ -104,14 +110,16 @@ const SignUpForm = () => {
         type="password"
         placeholder="4자 이상, 숫자와 영문자 조합"
         required
+        pattern="^[a-zA-Z0-9]{4,16}$"
         onChange={changeInput}
       />
       <label>닉네임</label>
 
       <input 
           id="nickname"
-          placeholder="4자 이상, 숫자와 영문자 조합" 
+          placeholder="2자이상 10자 이하, 한글과 영어로만 작성" 
           required
+          pattern="^[a-zA-Zㄱ-힣]{2,10}$"
           onChange={changeInput}
         />
       {/* <button className="checkbtn" onClick={(CheckNick)}>중복확인</button> */}

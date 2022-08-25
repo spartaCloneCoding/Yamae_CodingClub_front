@@ -3,7 +3,7 @@ import styled from "styled-components";
 import MainDetail from "../components/main/MainDetail";
 
 const Main = () => {
-  if (window.location.href) {
+  if (window.location.href.includes("token")) {
     const [url, token] = window.location.href.split("=");
     sessionStorage.setItem("token", token);
   }
