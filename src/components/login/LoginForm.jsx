@@ -10,7 +10,7 @@ import jwt_decode from "jwt-decode";
 
 const LoginForm = () => {
   const checkUserName = useSelector((state) => state.login.user);
-  console.log(checkUserName)
+  console.log(checkUserName);
   // const sessionToken = sessionStorage.getItem("token");
   // const payload = sessionStorage.getItem("token") !== null? jwt_decode(sessionStorage.getItem("token")): 1;
   // const payload = jwt_decode(sessionToken);
@@ -28,7 +28,6 @@ const LoginForm = () => {
     password: "",
   });
 
-
   const changeInput = (e) => {
     const {value, id} = e.target;
     setLoginData({...loginData, [id]: value});
@@ -37,9 +36,12 @@ const LoginForm = () => {
   const submitLogin = async (e) => {
     e.preventDefault();
     const loginState = await dispatch(__login(loginData));
-    const payload = sessionStorage.getItem("token") !== null? jwt_decode(sessionStorage.getItem("token")): 1;
+    const payload =
+      sessionStorage.getItem("token") !== null
+        ? jwt_decode(sessionStorage.getItem("token"))
+        : 1;
     if (loginState.type === "log/LOGIN_LOG/fulfilled") {
-        alert(`${payload.userNickname} 님 환영합니다.`);        
+      alert(`${payload.userNickname} 님 환영합니다.`);
       navigate("/");
     }
     if (loginState.type === "log/LOGIN_LOG/rejected") {
@@ -65,27 +67,19 @@ const LoginForm = () => {
 
   return (
     <StLoginContainer onSubmit={submitLogin}>
-      <a href="http://wetube-phenomenonlee.shop/api/users/auth/kakao"> 
+      <a href="http://wetube-phenomenonlee.shop/api/users/auth/kakao">
         <button className="kakao">
-          <img className="kakaoImg" src = {kakao} alt="이미지를 불러 올 수 없"/>
+          <img className="kakaoImg" src={kakao} alt="이미지를 불러 올 수 없" />
           &nbsp;카카오로 1초만에 시작하기
-        </button> 
+        </button>
       </a>
-      <a href="http://wetube-phenomenonlee.shop/api/users/auth/kakao"> 
-      일단 카카오 로그인
+      <a href="http://wetube-phenomenonlee.shop/api/users/auth/kakao">
+        일단 카카오 로그인
       </a>
-    <p className="btn" onClick={onToggleHandler}>이메일로 시작하기</p> 
-    {switches? (    
-    <>
-      <label>이메일</label> 
-      <input 
-        id="email"
-        type="email" 
-        placeholder="이메일을 입력해주세요" 
-        required
-        onChange={changeInput}
-        />
-      {switches_pw?(
+      <p className="btn" onClick={onToggleHandler}>
+        이메일로 시작하기
+      </p>
+      {switches ? (
         <>
           <label>이메일</label>
           <input
@@ -95,6 +89,7 @@ const LoginForm = () => {
             required
             onChange={changeInput}
           />
+
           {switches_pw ? (
             <>
               <label>비밀번호</label>
@@ -146,7 +141,7 @@ const StLoginContainer = styled.form`
     }
   }
 
- .kakao {
+  .kakao {
     background-color: #ffe500;
     color: black;
   }

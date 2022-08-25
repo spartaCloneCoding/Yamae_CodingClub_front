@@ -108,17 +108,14 @@ const SignUpForm = () => {
       />
       <label>닉네임</label>
 
-      <input 
-          id="nickname"
-          placeholder="4자 이상, 숫자와 영문자 조합" 
-          required
-          onChange={changeInput}
-        />
+      <input
+        id="nickname"
+        placeholder="4자 이상, 숫자와 영문자 조합"
+        required
+        onChange={changeInput}
+      />
       {/* <button className="checkbtn" onClick={(CheckNick)}>중복확인</button> */}
-      <button
-        type="submit"
-      >
-        가입하기</button>
+      <button type="submit">가입하기</button>
     </StLoginContainer>
   );
 };

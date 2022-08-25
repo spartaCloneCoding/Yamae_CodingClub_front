@@ -28,10 +28,9 @@ const Detail = () => {
   };
 
   useEffect(() => {
-    Get_Detail();
     GET_COMMENT();
+    Get_Detail();
   }, []);
-
   return (
     <>
       <Container>
@@ -49,6 +48,7 @@ const Detail = () => {
               </h4>
             </LikeCommentBox>
             <Content>{contents.content}</Content>
+            💬 댓글
             {commentList?.map((comments) => {
               return <Comment key={comments.commentId} comments={comments} />;
             })}

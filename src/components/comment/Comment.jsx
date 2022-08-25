@@ -14,8 +14,7 @@ const Comment = ({comments}) => {
     comment: "",
   });
 
-  // console.log(commentId);
-  // GET_COMMENT
+  // GET_COMMENT;
   // const GET_COMMENT = async () => {
   //   const res = await api.get(`api/comments/${id}`);
   //   setComment(res.data);
@@ -24,86 +23,82 @@ const Comment = ({comments}) => {
   // DELELTE_COMMENT
   const Del_COMMENT = (commentId) => {
     api.delete(`api/comments/${commentId}`);
-    if (Del_COMMENT == false) {
-      return alert("본인만 삭제가능");
-    }
   };
 
   // PATCH_COMMENT
   const EDIT_COMMENT = (commentId, editComment) => {
     api.patch(`api/comments/${commentId}`, editComment);
   };
-
-  // React.useEffect(() => {
-  //   GET_COMMENT();
-  // }, []);
-
-  // GET_COMMENT();
-  console.log("수정님", comments);
   return (
-    <Container>
-      💬 댓글
-      <>
-        {editInput !== true ? (
-          <ContentBox>
-            <CreatAt>{comments.createdAt}</CreatAt>
-            <NickName>{comments.User.nickname}</NickName>
-            <p>{comments.comment}</p>
-            {/* {comment.cmtNum} */}
-            <ButtonGroup>
-              <button
-                type="button"
-                onClick={() => {
-                  setEditInput(!editInput);
-                }}
-              >
-                ✍🏼
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  Del_COMMENT(comments.id);
-                }}
-              >
-                ❌
-              </button>
-            </ButtonGroup>
-          </ContentBox>
-        ) : (
-          <>
-            <div>
-              <input
-                type="text"
-                onChange={(e) => {
-                  const {value} = e.target;
-                  setEditComment({
-                    ...editComment,
-                    comment: value,
-                  });
-                }}
-                placeholder={comment.comment}
-              />
-              <button
-                type="button"
-                onClick={() => {
-                  EDIT_COMMENT(editComment);
-                  setEditInput(!editInput);
-                }}
-              >
-                완료
-              </button>
-            </div>
-          </>
-        )}
-      </>
-    </Container>
+    <>
+      <Container>
+        <>
+          {editInput !== true ? (
+            <ContentBox>
+              <div>
+                <CreatAt>{comments.createdAt}</CreatAt>
+                <NickName>{comments.User.nickname}</NickName>
+              </div>
+              <p>{comments.comment}</p>
+              {/* {comment.cmtNum} */}
+              <ButtonGroup>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setEditInput(!editInput);
+                  }}
+                >
+                  ✍🏼
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    Del_COMMENT(comments.id);
+                  }}
+                >
+                  ❌
+                </button>
+              </ButtonGroup>
+            </ContentBox>
+          ) : (
+            <>
+              <div>
+                <input
+                  type="text"
+                  onChange={(e) => {
+                    const {value} = e.target;
+                    setEditComment({
+                      ...editComment,
+                      comment: value,
+                    });
+                  }}
+                  placeholder={comment.comment}
+                />
+                <button
+                  type="button"
+                  onClick={() => {
+                    EDIT_COMMENT(editComment);
+                    setEditInput(!editInput);
+                  }}
+                >
+                  완료
+                </button>
+              </div>
+            </>
+          )}
+        </>
+      </Container>
+    </>
   );
 };
 
+export default Comment;
+
 const Container = styled.div`
-  padding: 40px 0 120px;
+  /* padding: 40px 0 120px;
   border-top: 1px solid #eaebed;
-  border-radius: 10px;
+  border-radius: 10px; */
+  height: 70px;
   input {
     border: 1px solid lightgray;
     border-radius: 10px;
@@ -134,8 +129,14 @@ const ButtonGroup = styled.div`
   }
 `;
 const NickName = styled.div``;
-const CreatAt = styled.div``;
+const CreatAt = styled.small`
+  font-size: 10px;
+`;
 
-export default Comment;
+// console.log(commentId);
+
+// React.useEffect(() => {
+//   GET_COMMENT();
+// }, []);
 
 // 데이터를 웹으로 출력중에 에러 Uncaught TypeError: comment.map is not a function 배열확인.
