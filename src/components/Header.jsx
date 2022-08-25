@@ -1,15 +1,14 @@
-import React, { useEffect } from "react";
+import React, {useEffect} from "react";
 import styled from "styled-components";
-import { ReactComponent as Logo } from "../../src/logo.svg";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { logOutUser, __checkToken } from "../redux/modules/loginSlice";
+import {ReactComponent as Logo} from "../../src/logo.svg";
+import {useNavigate} from "react-router-dom";
+import {useState} from "react";
+import {useLocation} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {logOutUser, __checkToken} from "../redux/modules/loginSlice";
 
 const Header = () => {
   const checktoken = useSelector((state) => state);
-  console.log(checktoken)
   const sessionToken = sessionStorage.getItem("token");
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -32,7 +31,6 @@ const Header = () => {
       dispatch(__checkToken());
     }
   }, [sessionToken]);
-
 
   return (
     <StHeader headerStyle={pathName === "/" ? "sticky" : "static"}>

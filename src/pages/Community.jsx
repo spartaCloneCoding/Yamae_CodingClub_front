@@ -1,27 +1,15 @@
 import React from "react";
-// import axios from "axios";
-// import { api } from "../shared/api.jsx";
-
 import Modal from "../components/community/WriteModal.jsx";
 import styled from "styled-components";
-import Line from "../components/Line";
-// import BottomBox from "../components/BottomBox";
 import CommunityItem from "../components/community/CommunityItem";
 import NoticeModal from "../components/community/NoticeModal";
-const Community = () => {
-  //모달 기능을 작동시키기 위한 useState
-  // const [show, setShow] = React.useState(false);
-  // const [list, setList] = React.useState([]);
 
+const Community = () => {
   return (
     <div>
       <Container>
-        <NoticeBox>
-          {/* <Line text="자유게시판" /> */}
-        </NoticeBox>
-        <TopBlock>
-            자유게시판
-        </TopBlock>
+        <NoticeBox></NoticeBox>
+        <TopBlock>자유게시판</TopBlock>
         <TopBox>
           <h2>
             <p>스파르타 코딩클럽에 오신걸 환영합니다.</p>
@@ -51,25 +39,24 @@ const Container = styled.div`
 `;
 
 const TopBlock = styled.div`
-    border-bottom: 1px solid #f1f1f1;
-    color: #505253;
-    padding: 0 10px;
-    white-space: nowrap;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    width: 100%;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-    -webkit-align-items: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-}
-`
+  border-bottom: 1px solid #f1f1f1;
+  color: #505253;
+  padding: 0 10px;
+  white-space: nowrap;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+`;
 const NoticeBox = styled.div`
   display: flex;
 `;
@@ -94,16 +81,10 @@ const TopBox = styled.div`
       width: 100%;
     }
   }
-
-  /* button {
-    background-color: whithe;
-    border: transparent;
-  } */
 `;
 
 const Content = styled.div`
   content: "";
-  /* display: none; */
   width: 862px px;
   padding: 50px 50px 100px 50px;
   background-color: #f4f5f6;
@@ -151,13 +132,5 @@ const FooterBox = styled.div`
     /* padding-top: 40px; */
   }
 `;
-
-// const Nick = styled.div`
-//   font-size: 14px;
-// `;
-
-// const BodyText = styled.div``;
-
-// const CtreatAt = styled.div``;
 
 export default Community;

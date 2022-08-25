@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import styled from "styled-components";
-import kakao from "../../src_assets/kakao.svg"
-import { useNavigate } from "react-router-dom";
-import { __login } from "../../redux/modules/loginSlice";
-import { __checkUsername } from "../../redux/modules/signupSlice";
-import { useDispatch, useSelector } from "react-redux";
+import kakao from "../../src_assets/kakao.svg";
+import {useNavigate} from "react-router-dom";
+import {__login} from "../../redux/modules/loginSlice";
+import {__checkUsername} from "../../redux/modules/signupSlice";
+import {useDispatch, useSelector} from "react-redux";
 import axios from "axios";
 // import jwt_decode from "jwt-decode";
 
 const LoginForm = () => {
   const checkUserName = useSelector((state) => state);
-  const token = window.localStorage.getItem('token');
+  const token = window.localStorage.getItem("token");
   // const payload = jwt_decode(token);
-  console.log(token)
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [switches, setSwitches] = useState(false);
@@ -24,14 +23,13 @@ const LoginForm = () => {
   });
 
   const changeInput = (e) => {
-    const { value, id } = e.target;
-    setLoginData({ ...loginData, [id]: value });
+    const {value, id} = e.target;
+    setLoginData({...loginData, [id]: value});
   };
-  
+
   const submitLogin = async (e) => {
     e.preventDefault();
     const loginState = await dispatch(__login(loginData));
-    console.log(loginState)
     if (loginState.type === "log/LOGIN_LOG/rejected") {
       alert("아이디 혹은 비밀번호가 틀렸습니다.");
     }
@@ -44,64 +42,72 @@ const LoginForm = () => {
   useEffect(() => {
     if (loginData.email !== "" && loginData.password !== "") {
       setFormData(true);
-    } 
-    else {
+    } else {
       setFormData(false);
     }
   }, [loginData]);
 
-
   const onToggleHandler = () => {
-    setSwitches(!switches)
-  }
+    setSwitches(!switches);
+  };
 
   // const onToggleHandler_pw = () => {
   //   setSwitches_pw(!switches_pw)
   // }
-  
+
   return (
     <StLoginContainer onSubmit={submitLogin}>
-    <button className="kakao">
-      <img className="kakaoImg" src = {kakao} alt="이미지를 불러 올 수 없"/>
-      &nbsp;카카오로 1초만에 시작 안됨
-      </button> 
-    <p className="btn" onClick={onToggleHandler}>이메일로 시작하기</p> 
-    <a href="http://wetube-phenomenonlee.shop/api/users/auth/kakao"> 일단 카카오 로그인</a>
-    {switches? (    
-    <>
-      <label>이메일</label> 
-      <input 
-        id="email"
-        type="email" 
-        placeholder="이메일을 입력해주세요" 
-        required
-        onChange={changeInput}
-        />
-      {switches_pw?(
+      <button className="kakao">
+        <img className="kakaoImg" src={kakao} alt="이미지를 불러 올 수 없" />
+        &nbsp;카카오로 1초만에 시작 안됨
+      </button>
+      <p className="btn" onClick={onToggleHandler}>
+        이메일로 시작하기
+      </p>
+      <a href="http://wetube-phenomenonlee.shop/api/users/auth/kakao">
+        {" "}
+        일단 카카오 로그인
+      </a>
+      {switches ? (
         <>
-        <label>비밀번호</label> 
-        <input 
-          id="password"
-          type="password" 
-          placeholder="4자 이상, 숫자와 영문자 조합" 
-          required
-          onChange={changeInput}
+          <label>이메일</label>
+          <input
+            id="email"
+            type="email"
+            placeholder="이메일을 입력해주세요"
+            required
+            onChange={changeInput}
           />
+          {switches_pw ? (
+            <>
+              <label>비밀번호</label>
+              <input
+                id="password"
+                type="password"
+                placeholder="4자 이상, 숫자와 영문자 조합"
+                required
+                onChange={changeInput}
+              />
+            </>
+          ) : (
+            ""
+          )}
+
+          <button type="submit">다음</button>
+          {/* <button onClick={onToggleHandler_pw}>ㅋㅋ</button> */}
+          <p
+            className="remember_p"
+            onClick={() => {
+              navigate("/signup");
+            }}
+          >
+            이메일이 기억나지 않아요
+          </p>
         </>
-      ): ""}
-      
-      <button
-        type="submit"
-      >
-        다음</button>
-      {/* <button onClick={onToggleHandler_pw}>ㅋㅋ</button> */}
-      <p className="remember_p" onClick={()=>{
-        navigate("/signup");
-      }}>이메일이 기억나지 않아요</p> 
-    </>) : null}
-  </StLoginContainer>
+      ) : null}
+    </StLoginContainer>
   );
-}
+};
 
 const StLoginContainer = styled.form`
   display: flex;
@@ -119,7 +125,7 @@ const StLoginContainer = styled.form`
     background-color: #e8344e;
 
     & > .kakaoImg {
-      transform: translate(-2px, 5px)
+      transform: translate(-2px, 5px);
     }
   }
 
@@ -140,7 +146,7 @@ const StLoginContainer = styled.form`
 
   & > .remember_p {
     margin-bottom: 30px;
-    cursor:pointer;
+    cursor: pointer;
   }
 
   & > input {
