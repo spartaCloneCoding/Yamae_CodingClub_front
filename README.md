@@ -11,3 +11,7 @@
 |------|------|
 |최락현|로그인, 회원가입, 소셜로그인 기능구현 |
 |김영건|Comment CRUD, Commnity CR, DetailPage D, 서버배포 |
+
+
+## 트러블슈팅
+https://www.notion.so/ef2886a499ff43569db21604ecc03d68
